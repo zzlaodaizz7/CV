@@ -50,11 +50,11 @@ class HomeController extends Controller
             if ($file->isValid()) {
                 $fileName = time() . '-' . str_replace(" ","",$file->getClientOriginalName());
                 $extension = $file->getClientOriginalExtension();
-                $linkcv = $path.'/'.$fileName;
+                $linkcv = 'uploads/cv/'.$fileName;
                 if(!in_array($extension,$IMGextensions)){
                     $format = true;
                 }else{
-                    $store = Storage::putFileAs($path , $file , $fileName . '.' . $extension);
+                    $store = Storage::putFileAs($path , $file , $fileName);
                     if ($store) {
                         $cva = new Cv;
                         $cva->job   =   $request->job_function;
