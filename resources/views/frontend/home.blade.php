@@ -43,10 +43,17 @@
                     @csrf
                                         <div class="form-group col-12 col-sm-6">
                         <label for="job_function">Vị trí:<span class="text-danger">*</span></label>
-                        <select name="job_function" class="form-control overflow-hidden" id="job_function"
+                        {{-- <select name="job_function" class="form-control overflow-hidden" id="job_function"
                                 multiple="multiple" size="1" required>
-                                                            <option value="Tester">Tester</option>
-                                                    </select>
+                                @foreach($job as $item)
+                                    <option value="{{$item->name}}">{{$item->name}}</option>
+                                @endforeach
+                        </select> --}}
+                        <select class="form-control select2" name="job_function" style="width: 100%;">
+                            @foreach($job as $item)
+                                    <option value="{{$item->name}}">{{$item->name}}</option>
+                                @endforeach
+                          </select>
                     </div>
                     <div class="form-group col-12 col-sm-6">
                         <label for="name">Tên ứng viên:<span class="text-danger">*</span></label>
@@ -148,7 +155,7 @@
             });
             _datetimepicker.val('');
         });
-
+        
         $('#job_function').select2({
             placeholder: "Vị trí tuyển dụng",
         });

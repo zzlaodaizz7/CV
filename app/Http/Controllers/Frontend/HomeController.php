@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Cv;
 use App\EmailTemp;
+use App\Job;
 class HomeController extends Controller
 {
     /**
@@ -17,7 +18,8 @@ class HomeController extends Controller
     public function index()
     {
         //
-        return view("frontend/home");
+        $job = Job::all();
+        return view("frontend/home",compact('job'));
     }
 
     /**

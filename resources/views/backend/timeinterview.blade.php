@@ -1,6 +1,6 @@
 @extends('layouts.app',['selected'=>'timeinterview'])
 @section('title')
-Home
+Time Inteview
 @endsection
 @section('css')
 <style type="text/css">

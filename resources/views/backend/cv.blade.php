@@ -120,12 +120,10 @@ Danh sách ứng viên
 						  <button type="button" class="rounded btn btn-secondary btn-addtag" data-data="{{$item}}" data-toggle="modal" data-target="#modal-sm" style="font-size: 10px;padding: 3px;border-bottom-right-radius: ">
 						    Add tag <i class="fas fa-tags"></i>
 						  </button>
-	
 						</div>
 				  	</div>
 					<div class="col-md-12 float-left">
 						<div class="col-md-12 taglist">
-							
 								@foreach($item->tag_cv as $ytem)
 								<span class="badge badge-secondary statusitem" data-id="{{$ytem->id}}">{{$ytem->tags_name}}</span>
 								@endforeach
@@ -164,7 +162,7 @@ Danh sách ứng viên
     						@elseif($item->status == "default")
 								<span class="badge badge-warning">Default</span></p>
 	    					@endif
-	    					<p class="text-info">Tester</p>
+	    					<p class="text-info">{{$item->job}}</p>
 	    				</div>
 	    			</div>
 	    		</div>
@@ -195,7 +193,7 @@ Danh sách ứng viên
                   <label>Add tag</label>
                   <select class="select2" name="tag[]" multiple="multiple" data-placeholder="Select a State" style="width: 100%;">
                   	@foreach($tags as $item)
-                  		<option value="{{$item->id}}">{{$item->name}}</option>
+                  		<option class="status-a" value="{{$item->id}}">{{$item->name}}</option>
                   	@endforeach
                   </select>
                 </form>
@@ -272,6 +270,15 @@ Danh sách ứng viên
 		$data = $(this).data('data');
 		$('.name-addtag').text($data['name']);
 		$('input[name=idcv]').val($data['id']);
+		$(this).parent().parent().parent().find('.statusitem').each(function(){
+			$namestatus = $(this).text();
+			$('.status-a').each(function(){
+				if ($namestatus == $(this).text()) {
+					// $('.select2 .select2-hidden-accessible').append($(this));
+					console.log($(this));
+				}
+			});
+		});
 	});
 	//Initialize Select2 Elements
     $('.select2').select2()
@@ -289,7 +296,27 @@ Danh sách ứng viên
             data: $data,
             success: function (data) {
             	let value = JSON.parse(JSON.stringify(data));
-            	console.log(value.content);
+            	// console.log(value.content);
+            	swal(value.content, {
+			      icon: "success",
+			      buttons: {
+				    // cancel: "Run away!",
+				    catch: {
+				      text: "OK",
+				      value: "ok",
+				    },
+				    // defeat: true,
+				  },
+			    })
+			    .then((value) => {
+				  switch (value) {
+				    case "ok":
+				      location.reload();
+				 
+				    default:
+				      location.reload();
+				  }
+				});
             }
         });
     });
