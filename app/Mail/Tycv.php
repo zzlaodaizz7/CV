@@ -7,11 +7,10 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class EmailTemplate extends Mailable
+class Tycv extends Mailable
 {
     use Queueable, SerializesModels;
     public $info;
-    public $name;
     /**
      * Create a new message instance.
      *
@@ -22,6 +21,7 @@ class EmailTemplate extends Mailable
         //
         $this->info = $info;
     }
+
     /**
      * Build the message.
      *
@@ -29,7 +29,6 @@ class EmailTemplate extends Mailable
      */
     public function build()
     {
-        $phr = $this->info['title'];
-        return $this->subject($this->info['title'])->view('email.emailtemplate');
+        return $this->subject("APPOTA - Thư cảm ơn đã ứng tuyển")->view('email.tycv');
     }
 }

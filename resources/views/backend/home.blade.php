@@ -5,9 +5,15 @@ Home
 @section('css')
 <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <style type="text/css">
+    .numbercv{
+      padding: 10px;
+      border:1px solid black;
+    }
+  </style>
 @endsection
 @section('content')
-	<div class="content-wrapper pt-3">
+	<div class="content-wrapper pt-3" style="font-size: 13px">
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
@@ -66,9 +72,9 @@ Home
           <section class="col-lg-7 connectedSortable">
             <!-- DIRECT CHAT -->
             <div class="card direct-chat direct-chat-primary">
-              <div class="card-header ">
+              <div class="card-header" style="background-color: #d63031;color: white">
               	<div class="d-flex align-items-center float-left flex-column">
-            		<h3 class="card-title">Lịch phỏng vấn sắp tới</h3>
+            		<h3 class="card-title">Các vị trí tuyển dụng mới nhất</h3>
             	</div>	
                 <div>
                 	<div class="card-tools float-right">
@@ -88,34 +94,80 @@ Home
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-              	<div class="col-md-12">
-              		<table id="example2" class="table table-bordered table-hover mt-3">
-                <thead>
-                <tr>
-                  <th style="width: 160px">Ngày giờ</th>
-                  <th>Họ tên</th>
-                  <th>Số điện thoại</th>
-                  <th style="width: 110px"></th>
-	                </tr>
-	                </thead>
-	                <tbody>
-	                <tr>
-	                  <td>20/05/1997 10:59:20</td>
-	                  <td>Đỗ Khương Duy</td>
-	                  <td>0389317219</td>
-	          			<td style="text-align: center; font-size: 13px">
-	          				<a href="storage/uploads/cv/1599757199-Do-Khuong-Duy-CV.pdf" target="_blank" class="border pt-1 pb-1 pr-2 pl-2 bg-danger"><i class="far fa-hand-point-right p-1"></i>Xem CV</a>
-	          			</td>
-	                </tr>
-	                
-	                </tfoot>
-	              </table>
+                @foreach($job as $item)
+              	<div class="col-md-12 border-bottom">
+              		<div class="row">
+                    <div class="col-md-3 d-flex flex-column justify-content-center pt-3 pb-3">
+                      <div class="numbercv w-75 mb-3" style="
+                      border-radius: 5px;
+                      border: 1px solid #b2bec3;
+                      text-align: center;
+                      left: 0;
+                      right: 0;
+                      margin: auto;">
+                        <span style="font-size: 25px;font-weight: 600;">{{count(\App\Cv::where([['job',$item->name],['status','default']])->get())+count(\App\Cv::where([['job',$item->name],['status','Invite']])->get())+count(\App\Cv::where([['job',$item->name],['status','Fail']])->get())}}</span><br>
+                        ứng viên
+                      </div>
+                      <div class="w-50 p-1" style="
+                      text-align: center;
+                      border-radius: 5px; 
+                      background-color: #0984e3;
+                      color: white;
+                      left: 0;
+                      right: 0;
+                      margin: auto;">
+                        JOB
+                      </div>
+                    </div>
+                    <div class="col-md-9 pb-3 pt-3">
+                      <p class="m-0 font-weight-bold" style="font-size: 25px">{{$item->getcategory->name}} - {{$item->name}}</p>
+                      <p class="m-0">{{$item->descrip}}</p>
+                      <p class="m-0">Chỉ tiêu: {{$item->target}}</p><p>Thời gian: {{$item->start_end}}</p>
+                      <div class="border-top mt-3 row">
+                        <div class="col-md-3 d-flex justify-content-center">
+                          <div class="w-75">
+                            <p class="m-0" style="font-size: 35px;margin-bottom: -5px !important; ">{{count(\App\Cv::where([['job',$item->name],['status','default']])->get())}}</p>
+                            <p>Nhận hồ sơ</p>
+                          </div>
+                          <div class="w-25 d-flex align-items-center">
+                            <i class="fas fa-chevron-right" style="font-size: 18px"></i>
+                          </div>
+                        </div>
+                        <div class="col-md-3 d-flex justify-content-center">
+                          <div class="w-75">
+                            <p class="m-0" style="font-size: 35px;margin-bottom: -5px !important; ">{{count(\App\Cv::where([['job',$item->name],['status','Invite']])->get())}}</p>
+                            <p>Phỏng vấn</p>
+                          </div>
+                          <div class="w-25 d-flex align-items-center">
+                            <i class="fas fa-chevron-right" style="font-size: 18px"></i>
+                          </div>
+                        </div>
+                        <div class="col-md-3 d-flex justify-content-center">
+                          <div class="w-75">
+                            <p class="m-0" style="font-size: 35px;margin-bottom: -5px !important; ">X</p>
+                            <p>Nhận</p>
+                          </div>
+                          <div class="w-25 d-flex align-items-center">
+                            <i class="fas fa-chevron-right" style="font-size: 18px"></i>
+                          </div>
+                        </div>
+                        <div class="col-md-3 d-flex justify-content-center">
+                          <div class="w-75">
+                            <p class="m-0" style="font-size: 35px;margin-bottom: -5px !important; ">{{count(\App\Cv::where([['job',$item->name],['status','Fail']])->get())}}</p>
+                            <p>Từ chối</p>
+                          </div>
+                          {{-- <div class="w-25 d-flex align-items-center">
+                            <i class="fas fa-chevron-right" style="font-size: 25px"></i>
+                          </div> --}}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
               	</div>  
+                @endforeach
               </div>
-              
             </div>
             <!--/.direct-chat -->
-
           </section>
           <!-- /.Left col -->
           <!-- right col (We are only adding the ID to make the widgets sortable)-->
@@ -139,38 +191,24 @@ Home
                 </div>
               </div>
               <div class="card-body p-0 pl-3 pr-3">
-                <div class="col-md-12 border mb-2" style="height: 55px">
+                @foreach($new as $item)
+                 <div class="col-md-12 border mb-2" style="height: 55px;font-size: 13px">
                 	<div class="d-flex align-items-center h-100 float-left mr-2">
                 		<i class="fas fa-user-circle" style="font-size: 35px"></i>
                 	</div>
-                	<div class="d-flex flex-column h-100 float-left mr-2">
-                		<p class="m-0">Đỗ Khương Duy</p>
-                		<p class="m-0">0389317219</p>
+                	<div class="d-flex flex-column h-100 float-left mr-2" style="width: 30%">
+                		<p class="m-0 mt-2">{{$item->name}}</p>
+                		<p class="m-0">{{$item->phone}}</p>
                 	</div>
                 	<div class="d-flex align-items-center h-100 float-left ml-3">
                 		<i class="fas fa-chevron-right"></i>
                 	</div>
                 	<div class="d-flex flex-column h-100 float-left ml-3 mr-2 pt-1">
-                		<p class="m-0">Vị trí: Tester</p>
-                		<p class="m-0" style="font-size: 13px">1 giờ trước</p>
+                		<p class="m-0 mt-1">Vị trí: {{$item->job}}</p>
+                		<p class="m-0" style="font-size: 13px">{{$item->created_at->diffForHumans()}}</p>
                 	</div>
                 </div>
-                 <div class="col-md-12 border mb-2" style="height: 55px">
-                	<div class="d-flex align-items-center h-100 float-left mr-2">
-                		<i class="fas fa-user-circle" style="font-size: 35px"></i>
-                	</div>
-                	<div class="d-flex flex-column h-100 float-left mr-2">
-                		<p class="m-0">Đỗ Khương Duy</p>
-                		<p class="m-0">0389317219</p>
-                	</div>
-                	<div class="d-flex align-items-center h-100 float-left ml-3">
-                		<i class="fas fa-chevron-right"></i>
-                	</div>
-                	<div class="d-flex flex-column h-100 float-left ml-3 mr-2 pt-1">
-                		<p class="m-0">Vị trí: Tester</p>
-                		<p class="m-0" style="font-size: 13px">1 giờ trước</p>
-                	</div>
-                </div>
+                @endforeach
               </div>
               <!-- /.card-body -->
               

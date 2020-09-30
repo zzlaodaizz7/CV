@@ -10,10 +10,30 @@ Time Inteview
   td{
     padding: 2px 10px !important;
   }
+  table th:first-child{
+            border-radius:10px 0 0 0;
+        }
+
+        table th:last-child{
+            border-radius:0 10px 0 0;
+        }
+        .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+            background-color: #ffe4e1;
+
+        }
+        .table-hover tbody tr:hover button{
+           background-color: #ffe4e1 !important;
+     
+        }
+        table tr:last-child{
+            border-radius:0 10px 0 0;
+            border-color: white !important;
+        }
 </style>
+ <link rel="stylesheet" href="//cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
 @endsection
 @section('content')
-	<div class="content-wrapper pt-3">
+	<div class="content-wrapper pt-3" style="font-size: 13px !important">
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
@@ -24,26 +44,26 @@ Time Inteview
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-              <table id="example1" class="table table-bordered">
-                <thead>
+              <table id="example1" class="table table-hover table-bordered">
+                <thead style="background-color: #d63031;color: white">
                 <tr>
-                  <th style=""></th>
-                  <th>Tên ứng viên</th>
-                  <th>Email</th>
-                  <th>Số điện thoại</th>
-                  <th style="width: 150px; text-align: center;">Ngày</th>
-                  <th width="100px"></th>
+                  {{-- <th style=""></th> --}}
+                  <th class="text-center">Tên ứng viên</th>
+                  <th class="text-center">Email</th>
+                  <th class="text-center">Số điện thoại</th>
+                  <th class="text-center" style="width: 150px; text-align: center;">Ngày</th>
+                  <th class="text-center" width="50px"></th>
                 </tr>
                 </thead>
                 <tbody>
                   @foreach($data as $item)
                 <tr>
-                  <td></td>
-                  <td><a href="storage/{{$item->cv}} " target="_blank">{{$item->name}}</a></td>
-                  <td>{{$item->email}}</td>
-                  <td>{{$item->phone}}</td>
-                  <td style="text-align: center;">{{$item->timeinvite}}</td>
-                  <td>
+                  {{-- <td></td> --}}
+                  <td class="align-middle"><a href="storage/{{$item->cv}} " target="_blank">{{$item->name}}</a></td>
+                  <td class="align-middle">{{$item->email}}</td>
+                  <td class="align-middle">{{$item->phone}}</td>
+                  <td class="align-middle" style="text-align: center;">{{$item->timeinvite}}</td>
+                  <td class="align-middle">
                     <div class="dropdown">
                      {{--  <a href="storage/{{$item->cv}}" target="_blank"><i class="far fa-eye" style="font-size: 13px"></i></a> --}}
                       <button class="btn dropdown-toggle" style="background-color: #fff;color: #1f2d3d!important;font-size: 13px" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -81,21 +101,37 @@ Time Inteview
 <script src="plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
 {{-- sweetalert --}}
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<!-- DataTables -->
+
+<script src="//cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
 <script>
   $(function () {
     $("#example1").DataTable({
-      "responsive": true,
       "autoWidth": false,
+        "bSort": false,
+        "pageLength": 10,
+        "info": false,
+        "language": {
+            // "info": "Hiển thị _START_ đến _END_ của _TOTAL_ bản",
+            "lengthMenu": "Hiển thị _MENU_ bản ghi",
+            "paginate": {
+                "first": "Đầu tiên",
+                "last": "Cuối",
+                "next": "Tiếp",
+                "previous": "Trước"
+
+            },
+          }
     });
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
-    });
+    // $('#example2').DataTable({
+    //   "paging": true,
+    //   "lengthChange": false,
+    //   "searching": false,
+    //   "ordering": true,
+    //   "info": true,
+    //   "autoWidth": false,
+    //   "responsive": true,
+    // });
   });
   $('.status').click(function(){
       $data = $(this).data('status');

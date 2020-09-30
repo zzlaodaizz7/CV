@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use App\Job;
+use App\Cv;
 class HomeController extends Controller
 {
     /**
@@ -15,7 +16,9 @@ class HomeController extends Controller
     public function index()
     {
         //
-        return view('backend.home');
+        $job = Job::where([['talenpools_id','!=',0],['status','on']])->get();
+        $new = Cv::where("status",'default')->orderBy('created_at','desc')->take(10)->get();
+        return view('backend.home',compact('job','new'));
     }
 
     /**

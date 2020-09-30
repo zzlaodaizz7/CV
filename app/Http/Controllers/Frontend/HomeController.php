@@ -84,7 +84,7 @@ class HomeController extends Controller
                             'source' => $request->ref,
                             'body'  => EmailTemp::first()->content,
                         ];
-                        \Mail::to($request->email)->send(new \App\Mail\EmailTemplate($info));
+                        \Mail::to($request->email)->send(new \App\Mail\Tycv($info));
                         return redirect('/')->with('status', 'Nộp CV thành công!');
                     }
                 }

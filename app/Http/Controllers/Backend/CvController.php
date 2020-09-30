@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Cv;
 use App\Tag;
 use App\Tag_Cv;
+use App\EmailTemp;
+use App\Job;
 use DB;
 class CvController extends Controller
 {
@@ -19,8 +21,9 @@ class CvController extends Controller
     {
         //
         $tags = Tag::all();
-        $data = Cv::where('status','!=','Fail')->groupBy(['email'])->get();
-        return view('backend.cv',compact('data','tags'));
+        $jobs = Job::where('talenpools_id','!=',0)->get();
+        $data = Cv::where('status','!=','Fail')->paginate(40);
+        return view('backend.cv',compact('data','tags','jobs'));
     
     }
 
@@ -107,9 +110,46 @@ class CvController extends Controller
     public function updateStatus(Request $request){
         if($request->timeinvi){
             $cv = Cv::find($request->id);
-            $cv->timeinvite=$request->timeinvi;
+            $info = [
+                    'title'         => "APPOTA - Thư mời phỏng vấn vị trí ".$request->job,
+                    'timeinvite'    => $request->timeinvi,
+                    'location'      => $request->location,
+                    'people'        => $request->people,
+                    'website'       => $request->website,
+                    'description'   => $request->descrip,
+                    'website'       => $request->website,
+                    'job'           => $request->job,
+                    'name'          => $request->name,
+                ];
+            $cv->timeinvite     =   $request->timeinvi;
+            $cv->status         =   $request->status;
+            $cv->save();
+            \Mail::to($request->email)->send(new \App\Mail\EmailTemplate($info));
+            return response()->json([
+                'type'      => 'success',
+                'content'   => "Đã gửi email và đổi status thành Invite"
+            ]);
+        }else if($request->fail){
+            $cv = Cv::find($request->id);
+            $info = [
+                    'name'          => $request->name,
+                ];
+            $cv->status         =   $request->status;
+            $cv->save();
+            \Mail::to($request->email)->send(new \App\Mail\Fail($info));
+            return response()->json([
+                'type'      => 'success',
+                'content'   => "Đã gửi email và đổi status thành Fail"
+            ]);
+        }else if($request->invitetointerview){
+            $cv = Cv::find($request->id);
             $cv->status    = $request->status;
             $cv->save();
+            $info = [
+                    'name'          => $request->name,
+                    'job'           => $request->job,
+                ];
+            \Mail::to($request->email)->send(new \App\Mail\Invitetointerview($info));
             return response()->json([
                 'type'      => 'success',
                 'title'     => 'Thất bại!',

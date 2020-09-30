@@ -15,7 +15,7 @@ class JobController extends Controller
     public function index()
     {
         //
-        $job = Job::all();
+        $job = Job::where('talenpools_id',0)->get();
         return view('Backend/job',compact('job'));
     }
 
@@ -39,11 +39,22 @@ class JobController extends Controller
     {
         //
         if ($request->ajax()) {
-            Job::create($request->all());
-            return response()->json([
-                'type'      => 'success',
-                'content'   => "Thêm thành công"
-            ]);
+            if ($request->namecategory) {
+                $a = new Job;
+                $a->name = $request->namecategory;
+                $a->save();
+                return response()->json([
+                    'type'      => 'success',
+                    'content'   => "Thêm thành công"
+                ]);
+            }else{
+                Job::create($request->all());
+                return response()->json([
+                    'type'      => 'success',
+                    'content'   => "Thêm thành công"
+                ]);
+            }
+            
         }
     }
 
@@ -79,12 +90,23 @@ class JobController extends Controller
     public function update(Request $request, $id)
     {
         //
+        //return $request;
         if ($request->ajax()) {
-            Job::find($id)->update($request->all());
-            return response()->json([
-                'type'      => 'success',
-                'content'   => "Thêm thành công"
-            ]);
+            if ($request->cate) {
+                Job::find($id)->update($request->all());
+                return response()->json([
+                    'type'      => 'success',
+                    'content'   => "Thêm thành công"
+                ]);
+            }else{
+                Job::find($id)->update($request->all());
+                return response()->json([
+                    'type'      => 'success',
+                    'content'   => "Thêm thành công"
+                ]);
+            }
+            
+            
         }
     }
 
