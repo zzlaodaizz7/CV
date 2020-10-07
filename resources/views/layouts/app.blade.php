@@ -15,7 +15,10 @@
   <link rel="stylesheet" href="dist/css/adminlte.min.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-
+   <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css"/>
+  <!-- Toastr -->
+  <link rel="stylesheet" href="{{asset("plugins/toastr/toastr.min.css")}}">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
 <div class="wrapper">
@@ -182,7 +185,15 @@
               <i class="nav-icon fas fa-id-card"></i>
               <p>
                 Danh sách ứng viên
-              
+                
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/overview" class="nav-link @if($selected=='cvdrop') active @endif">
+              <i class="nav-icon fas fa-id-card"></i>
+              <p>
+                Tổng quan trạng thái
               </p>
             </a>
           </li>
@@ -208,6 +219,7 @@
             <a href="#" class="nav-link">
               <i class="fas fa-circle nav-icon"></i>
               <p>{{$item->name}}</p>
+              <span class="badge badge-info right">{{count($item->getjob)}}</span>
             </a>
           </li>
           @endforeach
@@ -251,12 +263,15 @@
 <script src="dist/js/adminlte.js"></script>
 <!-- Toastr -->
 <script src="plugins/toastr/toastr.min.js"></script>
+<!-- overlayScrollbars -->
+<script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <script type="text/javascript">
   $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+  
 </script>
 @yield('js')
 <!-- REQUIRED SCRIPTS -->

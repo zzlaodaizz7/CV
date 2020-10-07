@@ -66,15 +66,16 @@ Job
               <!-- /.card-header -->
               <div class="card-body">
               	<div class="col-md-12 pt-3 pb-3">
-              		<table id="example2" class="table table-bordered table-hover mt-3">
-                    <thead style="background-color: #d63031;color: white">
+              		<table id="example2" class="table table-hover mt-3">
+                    <thead style="background: rgb(0,0,0);
+background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(170,14,31,1) 100%, rgba(0,212,255,1) 100%);color: white">
                       <tr>
-                        <th class="text-center" style="width: 10px">ID</th>
+                        <th class="text-center" width="150px"></th>
                         <th class="text-center">Tên</th>
                         <th class="text-center">Mô tả</th>
                         <th class="text-center">Số lượng</th>
                         <th class="text-center">Thời gian bắt đầu</th>
-                        <th style="width: 60px"></th>
+                        <th style="width: 80px"></th>
     	                </tr>
   	                </thead>
 	                <tbody>
@@ -89,28 +90,53 @@ Job
                       <td class="border-0"></td>
                       <td class="border-0"></td>
                       <td class="border-0"></td>
-                      <td style="text-align: center"><button type="button" class="btn btn-sm btn-primary btn-edit-category" data-data="{{$item}}" data-toggle="modal"  data-target="#modal-xl-edit-category">
+                      <td style="text-align: center">
+                        <button type="button" style="background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,0.9220063025210083) 32%, rgba(0,212,255,1) 100%);" class="btn btn-xs btn-primary btn-edit-category" data-data="{{$item}}" data-toggle="modal"  data-target="#modal-xl-edit-category">
                                 <i class="fas fa-edit" alt="Sửa"></i>
                             </button>
-                            <button type="button" class="btn btn-sm btn-danger btn-Delete" data-data="{{$item->id}}" >
+                            <button type="button" style="background: linear-gradient(90deg, rgba(233,8,167,1) 0%, rgba(247,8,18,1) 52%, rgba(255,0,0,1) 100%);" class="btn btn-xs btn-danger btn-Delete" data-data="{{$item->id}}" >
                                 <i class="fas fa-trash-alt"></i>
                             </button>
                         </td>
                     </tr>
                     @foreach($item->getjob as $ytem)
                       <tr>
-                        
-                        <td class="border text-center">{{$ytem->id}}</td>
+                        <td class="border">
+                            <div class="row">
+                                <div class="col-md-7 pr-0 ">Ứng tuyển:</div> 
+                                <div class="col-md-3 p-0">{{count(\App\Cv::where([['job',$ytem->name],['status','default']])->get())}}</div>
+                         
+                                <div class="col-md-7 pr-0 ">Mời:</div> 
+                                <div class="col-md-3 p-0"> {{count(\App\Cv::where([['job',$ytem->name],['status','Invite']])->get())}}</div>
+
+                                 <div class="col-md-7 pr-0">Offer: </div>
+                                 <div class="col-md-3 p-0"> 
+                                    X
+                                </div>
+                                <div class="col-md-7 pr-0">Fail: </div>
+                                <div class="col-md-3 p-0"> {{count(\App\Cv::where([['job',$ytem->name],['status','Fail']])->get())}}
+                                </div>
+                            </div>
+                                
+                             
+                               
+                      
+                            
+                             {{-- - {{count(\App\Cv::where([['job',$ytem->name],['status','Invite']])->get())}}
+                              - Offer 
+                              - {{count(\App\Cv::where([['job',$ytem->name],['status','Fail']])->get())}} --}}
+                        </td>
                         <td class="border position-relative">{{$ytem->name}} @if($ytem->status == 'on')
                           <i class="far fa-check-circle" style="color: green;position: absolute;top: 0;right: 0"></i>
                         @endif</td>
                         <td class="border">{{$ytem->descrip}}</td>
                         <td class="border text-center">{{$ytem->target}}</td>
                         <td class="border text-center">{{$ytem->start_end}}</td>
-                        <td style="text-align: center"><button type="button" class="btn btn-sm btn-primary btn-edit" data-data="{{$ytem}}" data-toggle="modal"  data-target="#modal-xl-edit">
+                        <td class="border" style="text-align: center">
+                            <button type="button" style="background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,0.9220063025210083) 32%, rgba(0,212,255,1) 100%);" class="btn btn-xs btn-primary btn-edit" data-data="{{$ytem}}" data-toggle="modal"  data-target="#modal-xl-edit">
                                 <i class="fas fa-edit" alt="Sửa"></i>
                             </button>
-                            <button type="button" class="btn btn-sm btn-danger btn-Delete" data-data="{{$ytem->id}}" >
+                            <button style="background: linear-gradient(90deg, rgba(233,8,167,1) 0%, rgba(247,8,18,1) 52%, rgba(255,0,0,1) 100%);" type="button" class="btn btn-xs btn-danger btn-Delete" data-data="{{$ytem->id}}" >
                                 <i class="fas fa-trash-alt"></i>
                             </button>
                         </td>
@@ -184,7 +210,7 @@ Job
                             </div>
                         </div>
                         
-                        <div class="col-md-12">
+                        <div class="col-md-9">
                             <div class="form-group">
                                 <label for="name">Thời gian bắt đầu và kết thúc</label>
                                 <div class="input-group">
@@ -193,6 +219,15 @@ Job
                                   </div>
                                   <input type="text" name="start_end" class="form-control float-right" id="reservationtime1">
                                 </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="name">Trạng thái</label>
+                                <div class="form-control border-0">
+                                  <input type="checkbox" name="" class="price_check" checked="" data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                                </div>
+                                <input type="hidden" name="status" class="status">
                             </div>
                         </div>
                     </div>
@@ -290,7 +325,7 @@ Job
                             </div>
                         </div>
                         
-                        <div class="col-md-12">
+                        <div class="col-md-9">
                             <div class="form-group">
                                 <label for="name">Thời gian bắt đầu và kết thúc</label>
                                 <div class="input-group">
@@ -299,6 +334,15 @@ Job
                                   </div>
                                   <input type="text" name="start_end" class="form-control float-right" id="reservationtime">
                                 </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="name">Trạng thái</label>
+                                <div class="form-control border-0">
+                                  <input type="checkbox" name="" class="price_check" checked="" data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                                </div>
+                                <input type="hidden" name="status" class="status" value="on">
                             </div>
                         </div>
                     </div>
@@ -386,7 +430,7 @@ Job
 <script src="//cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
 {{-- <script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script> --}}
 <script type="text/javascript">
-	$('#example2').DataTable({
+	// $('#example2').DataTable({
      //  "paging": true,
      //  "lengthChange": true,
      //  "searching": true,
@@ -401,22 +445,22 @@ Job
 	    //     "previous":   "Trước"
 	    // },
       // }
-      "autoWidth": false,
-        "bSort": false,
-        "pageLength": 10,
-        "info": false,
-        "language": {
-            // "info": "Hiển thị _START_ đến _END_ của _TOTAL_ bản",
-            "lengthMenu": "Hiển thị _MENU_ bản ghi",
-            "paginate": {
-                "first": "Đầu tiên",
-                "last": "Cuối",
-                "next": "Tiếp",
-                "previous": "Trước"
+    //   "autoWidth": false,
+    //     "bSort": false,
+    //     "pageLength": 10,
+    //     "info": false,
+    //     "language": {
+    //         // "info": "Hiển thị _START_ đến _END_ của _TOTAL_ bản",
+    //         "lengthMenu": "Hiển thị _MENU_ bản ghi",
+    //         "paginate": {
+    //             "first": "Đầu tiên",
+    //             "last": "Cuối",
+    //             "next": "Tiếp",
+    //             "previous": "Trước"
 
-            },
-          }
-    });
+    //         },
+    //       }
+    // });
  $(".price_check").bootstrapSwitch({
     onSwitchChange: function(e, state) { 
       console.log(state);
@@ -528,6 +572,10 @@ Job
       $("#modal-xl-edit input ").each( function(){
           $(this).val($databtn[$(this).attr("name")]);
       });
+      if ($databtn['status'] == 'off') {
+        // $(".price_check").attr('checked',false);
+        $(".price_check").bootstrapSwitch('state', false);
+      }
       $('#namecateedit option').each(function(){
         if ($(this).val()==$databtn['talenpools_id']) {
           $(this).attr("selected","true");
@@ -548,7 +596,6 @@ Job
   $('form[name=add-cate]').submit(function(e){
     e.preventDefault();
     $data = $('form[name=add-cate]').serialize();
-    console.log($data);
     $.ajax({
           url: '/job',
           type: 'POST',

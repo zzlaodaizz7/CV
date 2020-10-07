@@ -26,5 +26,6 @@ Auth::routes();
 		Route::post('/updatestatus','Backend\CvController@updateStatus');
 		Route::post('/deletetag','Backend\CvController@deleteTag');
 		Route::resource('/job','Backend\JobController');
+		Route::resource('/overview','Backend\OverviewController');
 	});
 //});

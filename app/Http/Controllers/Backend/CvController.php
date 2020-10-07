@@ -10,6 +10,7 @@ use App\Tag_Cv;
 use App\EmailTemp;
 use App\Job;
 use DB;
+use Validator;
 class CvController extends Controller
 {
     /**
@@ -21,9 +22,8 @@ class CvController extends Controller
     {
         //
         $tags = Tag::all();
-        $jobs = Job::where('talenpools_id','!=',0)->get();
-        $data = Cv::where('status','!=','Fail')->paginate(40);
-        return view('backend.cv',compact('data','tags','jobs'));
+        $data = Cv::where('status','=','default')->paginate(40);
+        return view('backend.cv',compact('data','tags'));
     
     }
 
@@ -108,7 +108,28 @@ class CvController extends Controller
         //
     }
     public function updateStatus(Request $request){
+        
         if($request->timeinvi){
+            $validator = Validator::make($request->all(), [
+                'people'            => 'required',
+                'website'           => 'required',
+                'descrip'       => 'required',  
+                'timeinvi'        => 'required',
+                'location'          => 'required',
+            ],
+            [
+                'people.required'               => 'Chưa chọn người đón tiếp',
+                'website.required'              => 'Chưa nhập website',
+                'descrip.required'          => 'Chưa nhập mô tả',  
+                'timeinvi.required'           => 'Chưa nhập thời gian mời',
+                'location.required'             => 'Chưa chọn địa điểm',
+            ]);
+            if($validator->fails()) {
+                return response()->json([
+                    'type' => 'error',
+                    'content' => $validator->errors()->all()[0],
+                ],402);
+            }
             $cv = Cv::find($request->id);
             $info = [
                     'title'         => "APPOTA - Thư mời phỏng vấn vị trí ".$request->job,
@@ -117,7 +138,6 @@ class CvController extends Controller
                     'people'        => $request->people,
                     'website'       => $request->website,
                     'description'   => $request->descrip,
-                    'website'       => $request->website,
                     'job'           => $request->job,
                     'name'          => $request->name,
                 ];
@@ -141,27 +161,13 @@ class CvController extends Controller
                 'type'      => 'success',
                 'content'   => "Đã gửi email và đổi status thành Fail"
             ]);
-        }else if($request->invitetointerview){
-            $cv = Cv::find($request->id);
-            $cv->status    = $request->status;
-            $cv->save();
-            $info = [
-                    'name'          => $request->name,
-                    'job'           => $request->job,
-                ];
-            \Mail::to($request->email)->send(new \App\Mail\Invitetointerview($info));
-            return response()->json([
-                'type'      => 'success',
-                'title'     => 'Thất bại!',
-                'content'   => "Update thành công"
-            ]);
+        
         }else{
             $cv = Cv::find($request->id);
             $cv->status    = $request->status;
             $cv->save();
             return response()->json([
                 'type'      => 'success',
-                'title'     => 'Thất bại!',
                 'content'   => "Update thành công"
             ]);
         }

@@ -44,8 +44,9 @@ Time Inteview
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-              <table id="example1" class="table table-hover table-bordered">
-                <thead style="background-color: #d63031;color: white">
+              <table id="example1" class="table-hover">
+                <thead style="background: rgb(0,0,0);
+background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(170,14,31,1) 100%, rgba(0,212,255,1) 100%);color: white">
                 <tr>
                   {{-- <th style=""></th> --}}
                   <th class="text-center">Tên ứng viên</th>
@@ -57,7 +58,7 @@ Time Inteview
                 </thead>
                 <tbody>
                   @foreach($data as $item)
-                <tr>
+                <tr class="border-bottom">
                   {{-- <td></td> --}}
                   <td class="align-middle"><a href="storage/{{$item->cv}} " target="_blank">{{$item->name}}</a></td>
                   <td class="align-middle">{{$item->email}}</td>

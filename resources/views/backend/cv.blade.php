@@ -37,6 +37,11 @@ Danh sách ứng viên
 		width: 70%;
 		float: right;
 	}
+  .pagination{
+    margin: 0 !important;
+    display: flex;
+    justify-content: center;
+  }
 </style>
 @endsection
 @section('content')
@@ -48,16 +53,10 @@ Danh sách ứng viên
           <div class="col-sm-4">
             <h1 class="m-0 text-dark">Danh sách ứng viên</h1>
           </div><!-- /.col -->
-          {{-- <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item active">Danh sách ứng viên</li>
-            </ol>
-          </div><!-- /.col --> --}}
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
-
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
@@ -83,7 +82,7 @@ Danh sách ứng viên
                   </select>
                 </div>
               </div>
-              <div class="col-md-3">
+             {{--  <div class="col-md-3">
                 <div class="form-group">
                   <label for="jobsearch">Tìm kiếm theo vị trí apply</label>
                   <select class="form-control" name="jobsearch" id="jobsearch">
@@ -93,8 +92,8 @@ Danh sách ứng viên
                     @endforeach
                   </select>
                 </div>
-              </div>
-              <div class="col-md-3">
+              </div> --}}
+              {{-- <div class="col-md-3">
                 <div class="form-group">
                   <label for="skillsearch">Tìm kiếm theo tag kỹ năng</label>
                   <select class="form-control" name="skillsearch" id="skillsearch">
@@ -104,10 +103,10 @@ Danh sách ứng viên
                     @endforeach
                   </select>
                 </div>
-              </div>
+              </div> --}}
               <div class="col-md-12 text-center mb-3"><button type="submit" class="btn btn-primary">Tìm kiếm</button></div>
             </form>
-          </div>
+          {{-- </div> --}}
               
         	@foreach($data as $item)
         	<div class="col-md-3 position-relative cv mb-5">
@@ -119,7 +118,7 @@ Danh sách ứng viên
         				<a href="storage/{{$item->cv}}" target="_blank" class="namecv mt-2 mb-0 font-weight-bold text-white" style="font-size: 16px;">{{$item->name}}</a>
         				<p class="m-0 font-weight-light text-white" style="font-size: 12px">{{$item->job}}</p>
         			</div>
-	        	<div class="dropdown position-absolute" style="top: 36px; right: 10px;">
+	        	<div class="dropdown position-absolute" style="top: 45px; right: 10px;">
 	        		{{-- <a href="storage/{{$item->cv}}" target="_blank"><i class="far fa-eye" style="font-size: 13px"></i></a> --}}
 				  <button class="btn dropdown-toggle" style=";color: white !important;font-size: 13px" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 				    Status CV
@@ -128,10 +127,11 @@ Danh sách ứng viên
 {{-- 				  	<a class="dropdown-item status" data-toggle="" data-target="" data-id="{{$item->id}}" data-status="InviteToInterview" href="#">Mời ứng tuyển</a> --}}
 				    <a class="dropdown-item status" data-toggle="modal" data-target="#modal-datetime" data-id="{{$item->id}}" data-status="Invite" href="#">Invite</a>
 				    <a class="dropdown-item status" data-toggle="modal" data-id="{{$item->id}}" data-status="Fail" href="#">Fail</a>
+            <a class="dropdown-item status" data-id="{{$item->id}}" data-status="Pass" href="#">Pass</a>
 				  {{--   <a class="dropdown-item status" data-id="{{$item->id}}" data-status="Consider"href="#">Consider</a> --}}
-				    {{-- <a class="dropdown-item" href="#">Offer</a> --}}
-				    {{-- <a class="dropdown-item" href="#">Fail PV</a> --}}
-				    <a class="dropdown-item status" data-id="{{$item->id}}" data-status="Blacklist"href="#">Blacklist</a>
+				    <a class="dropdown-item status" data-id="{{$item->id}}" data-status="Offer" href="#">Offer</a>
+				    
+				    <a class="dropdown-item status" data-id="{{$item->id}}" data-status="Blacklist" href="#">Blacklist</a>
 				  </div>
 				</div>
 	    		</div>
@@ -208,7 +208,7 @@ Danh sách ứng viên
 	    						@elseif($item->status == "Cancel")
 	    						<span class="badge badge-secondary">{{$item->status}}</span></p>
     						@elseif($item->status == "default")
-								<span class="badge badge-warning">Default</span></p>
+								<span class="badge badge-warning text-white">Nộp CV</span></p>
 	    					@endif
 	    					<p class="text-info jobcv">{{$item->job}}</p>
 	    				</div>
@@ -554,7 +554,6 @@ Danh sách ứng viên
 		            	status 		: 	$data,
 		            	name 		: 	$namecv,
 		            	email 		: 	$email,
-		            	
 		            	fail 		: 1,
 		            },
 		            success: function (data) {
@@ -646,7 +645,7 @@ Danh sách ứng viên
 				    .then((value) => {
 					  switch (value) {
 					    case "ok":
-					      // location.reload();
+					      location.reload();
 					 
 					    default:
 					      // location.reload();
