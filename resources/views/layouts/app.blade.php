@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <base href="{{asset("")}}"/>
   <title>HR | @yield('title')</title>
   @yield('css')
   <!-- Font Awesome Icons -->
@@ -29,7 +30,7 @@
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
-    
+
     </ul>
 
 {{--     <!-- SEARCH FORM -->
@@ -185,7 +186,7 @@
               <i class="nav-icon fas fa-id-card"></i>
               <p>
                 Danh sách ứng viên
-                
+
               </p>
             </a>
           </li>
@@ -216,7 +217,7 @@
           <li class="nav-header">Talen pool</li>
           @foreach(\App\Job::where('talenpools_id',0)->get() as $item)
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{url("overview")}}/{{$item->name}}"  class="nav-link @if($selected == $item->name) active @endif">
               <i class="fas fa-circle nav-icon"></i>
               <p>{{$item->name}}</p>
               <span class="badge badge-info right">{{count($item->getjob)}}</span>
@@ -243,7 +244,7 @@
   <!-- Main Footer -->
   {{-- <footer class="main-footer"> --}}
     {{-- <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io"></a>.</strong> --}}
-   
+
     {{-- <div class="float-right d-none d-sm-inline-block"> --}}
       {{-- <b>Version</b> 3.0.4 --}}
     {{-- </div> --}}
@@ -271,7 +272,6 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-  
 </script>
 @yield('js')
 <!-- REQUIRED SCRIPTS -->

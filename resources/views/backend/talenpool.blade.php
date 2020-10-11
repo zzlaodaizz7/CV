@@ -1,4 +1,4 @@
-@extends('layouts.app',['selected'=>'cvdrop'])
+@extends('layouts.app',['selected'=>"$id"])
 @section('title')
     Danh sách ứng viên
 @endsection
@@ -232,7 +232,6 @@
                     </div>
                 </div>
                 <div class="col-md-12 mt-3">
-
                     {{$data->links()}}
                 </div>
             </div><!--/. container-fluid -->
@@ -444,7 +443,7 @@
                                                 switch (value) {
                                                     case "ok":
                                                         $('#modal-datetime').modal('hide');
-                                                    location.reload();
+                                                        location.reload();
                                                     default:
                                                     // location.reload();
                                                 }

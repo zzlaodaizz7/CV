@@ -18,13 +18,19 @@ class CvController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
         $tags = Tag::all();
-        $data = Cv::where('status','=','default')->paginate(40);
+        if ($request->keyword){
+            $data = Cv::where('status','=','fail')->where("name","like","%".$request->keyword."%")->orwhere("email","like","%".$request->keyword."%")->orderBy("created_at","ASC")->paginate(40);
+//            return $data;
+            return view('backend.cv',compact('data','tags'));
+        }
+
+        $data = Cv::where('status','=','default')->orderBy("created_at","ASC")->paginate(40);
         return view('backend.cv',compact('data','tags'));
-    
+
     }
 
     /**
@@ -60,7 +66,7 @@ class CvController extends Controller
                 'content'   => "Thành công"
             ]);
         }
-        
+
     }
 
     /**
@@ -108,19 +114,19 @@ class CvController extends Controller
         //
     }
     public function updateStatus(Request $request){
-        
+
         if($request->timeinvi){
             $validator = Validator::make($request->all(), [
                 'people'            => 'required',
                 'website'           => 'required',
-                'descrip'       => 'required',  
+                'descrip'       => 'required',
                 'timeinvi'        => 'required',
                 'location'          => 'required',
             ],
             [
                 'people.required'               => 'Chưa chọn người đón tiếp',
                 'website.required'              => 'Chưa nhập website',
-                'descrip.required'          => 'Chưa nhập mô tả',  
+                'descrip.required'          => 'Chưa nhập mô tả',
                 'timeinvi.required'           => 'Chưa nhập thời gian mời',
                 'location.required'             => 'Chưa chọn địa điểm',
             ]);
@@ -161,17 +167,17 @@ class CvController extends Controller
                 'type'      => 'success',
                 'content'   => "Đã gửi email và đổi status thành Fail"
             ]);
-        
+
         }else{
             $cv = Cv::find($request->id);
             $cv->status    = $request->status;
             $cv->save();
             return response()->json([
                 'type'      => 'success',
-                'content'   => "Update thành công"
+                'content'   => "Update thành công thành ". $request->status ." cho ". $cv->name,
             ]);
         }
-        
+
     }
     public function deleteTag(Request $request){
         Tag_Cv::find($request->id)->delete();

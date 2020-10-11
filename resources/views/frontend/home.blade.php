@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,19 +28,19 @@
     <div class="main-content">
         <div class="wrap-form">
             @if (session('status'))
-                            <div class="alert alert-success" style="font-size: 14px;text-align: center;">
-                                {{ session('status') }}
-                            </div>
-                        @endif
-                        @if (session('statusFail'))
-                            <div class="alert alert-danger" style="font-size: 14px;text-align: center;">
-                                {{ session('status') }}
-                            </div>
-                        @endif
+                <div class="alert alert-success" style="font-size: 14px;text-align: center;">
+                    {{ session('status') }}
+                </div>
+            @endif
+            @if (session('statusFail'))
+                <div class="alert alert-danger" style="font-size: 14px;text-align: center;">
+                    {{ session('status') }}
+                </div>
+            @endif
             <div class="content">
                 <form method="POST" enctype="multipart/form-data" id="cv_form">
                     @csrf
-                                        <div class="form-group col-12 col-sm-6">
+                    <div class="form-group col-12 col-sm-6">
                         <label for="job_function">Vị trí:<span class="text-danger">*</span></label>
                         {{-- <select name="job_function" class="form-control overflow-hidden" id="job_function"
                                 multiple="multiple" size="1" required>
@@ -51,9 +50,11 @@
                         </select> --}}
                         <select class="form-control select2" name="job_function" style="width: 100%;">
                             @foreach($job as $item)
-                                    <option value="{{$item->name}}">{{$item->name}}</option>
+                                @foreach($item->getjob as $ytem)
+                                    <option value="{{$ytem->name}}">{{$ytem->name}}</option>
                                 @endforeach
-                          </select>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="form-group col-12 col-sm-6">
                         <label for="name">Tên ứng viên:<span class="text-danger">*</span></label>
@@ -103,23 +104,23 @@
                             <option value="20,100">Trên 20 triệu</option>
                         </select>
                     </div>
-                                            <div class="form-group col-12 col-sm-6">
-                            <label for="ref">Bạn biết đến thông tin tuyển dụng từ đâu:</label>
-                            <select class="form-control" id="ref" name="ref">
-                                    <option value="Ứng tuyển">Ứng tuyển</option>
-                                    <option value="TopCV">TopCV</option>
-                                    <option value="Linkedin">Linkedin</option>
-                                    <option value="Refer">Refer</option>
-                                    <option value="Facebook">Facebook</option>
-                                                            </select>
-                        </div>
-                                        <div class="form-group col-12 col-sm-12">
+                    <div class="form-group col-12 col-sm-6">
+                        <label for="ref">Bạn biết đến thông tin tuyển dụng từ đâu:</label>
+                        <select class="form-control" id="ref" name="ref">
+                            <option value="Ứng tuyển">Ứng tuyển</option>
+                            <option value="TopCV">TopCV</option>
+                            <option value="Linkedin">Linkedin</option>
+                            <option value="Refer">Refer</option>
+                            <option value="Facebook">Facebook</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-12 col-sm-12">
                         <div class="custom-file-upload">
                             <label for="file">Upload CV phải là file có dạng <span class="text-danger">doc,docx,pdf,xls,xlsx</span>
                                 và không được quá 10000kb <span class="text-danger">*</span></label>
                             <input type="file" class="form-control-file" id="file" name="file" required>
                         </div>
-                        
+
                     </div>
                     <div class="form-group text-center col-12 col-sm-12">
                         <button type="" class="btn btn-submit">Gửi thông tin</button>
@@ -155,23 +156,23 @@
             });
             _datetimepicker.val('');
         });
-        
+
         $('#job_function').select2({
             placeholder: "Vị trí tuyển dụng",
         });
         // $('#job_skill').select2({
         //     placeholder: "Kỹ năng công việc",
         // });
-        $('#file').bind('change', function() {
+        $('#file').bind('change', function () {
 
-          //this.files[0].size gets the size of your file.
-          if (this.files[0].size > 100000) {
-            alert("File quá dung lượng");
-            $("#file").val(null);
-            }else{
+            //this.files[0].size gets the size of your file.
+            if (this.files[0].size > 100000) {
+                alert("File quá dung lượng");
+                $("#file").val(null);
+            } else {
                 var fileExtension = ['doc', 'docx', 'pdf', 'xls', 'xlsx'];
                 if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
-                    alert("Các định dạng file được chấp nhận : "+fileExtension.join(', '));
+                    alert("Các định dạng file được chấp nhận : " + fileExtension.join(', '));
                     $("#file").val(null);
                 }
             }

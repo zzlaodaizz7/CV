@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 // });
 Route::resource("/","Frontend\HomeController");
 Auth::routes();
+Route::get('test', 'TestController@index');
 //Route::prefix('admin')->group(function () {
 	Route::middleware('auth')->group(function () {
 		Route::resource('/home', 'Backend\HomeController');

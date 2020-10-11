@@ -63,51 +63,15 @@ Danh sách ứng viên
         <div class="row">
           <form class="col-md-12">
             <div class="row">
-              <div class="col-md-3">
+              <div class="col-md-6 m-auto">
                 <div class="form-group">
-                  <label for="keyword">Tìm kiếm theo tên hoặc email</label>
-                  <input type="text" name="keyword" value="@php if(isset($_GET['keyword'])) echo $_GET['keyword'] @endphp" class="form-control" id="keyword" placeholder="">
+                  <input type="text" style="width: 300px;float: left;border-top-right-radius: 0;border-bottom-right-radius: 0;" placeholder="Nhập tên hoặc email cần tìm" name="keyword" value="@php if(isset($_GET['keyword'])) echo $_GET['keyword'] @endphp" class="form-control" id="keyword" placeholder=""/>
+                    <button type="submit" style="border-top-left-radius: 0;border-bottom-left-radius: 0;" class="btn btn-primary"><i class="fas fa-search"></i></button>
                 </div>
               </div>
-              <div class="col-md-3">
-                <div class="form-group">
-                  <label for="statussearch">Tìm kiếm theo trạng thái</label>
-                  <select class="form-control" name="statussearch" id="statussearch">
-                    <option value="">--Chọn trạng thái--</option>
-                    <option value="Pass">Pass</option>
-                    <option value="Fail">Fail</option>
-                    <option value="Invite">Invite</option>
-                    <option value="Blacklist">Blacklist</option>
-                    <option value="Offer">Offer</option>
-                  </select>
-                </div>
-              </div>
-             {{--  <div class="col-md-3">
-                <div class="form-group">
-                  <label for="jobsearch">Tìm kiếm theo vị trí apply</label>
-                  <select class="form-control" name="jobsearch" id="jobsearch">
-                    <option value="">--Chọn vị trí apply--</option>
-                    @foreach($jobs as $item)
-                    <option value="{{$item->name}}">{{$item->name}}</option>
-                    @endforeach
-                  </select>
-                </div>
-              </div> --}}
-              {{-- <div class="col-md-3">
-                <div class="form-group">
-                  <label for="skillsearch">Tìm kiếm theo tag kỹ năng</label>
-                  <select class="form-control" name="skillsearch" id="skillsearch">
-                    <option value="">--Chọn kỹ năng--</option>
-                    @foreach($tags as $item)
-                      <option value="{{$item->name}}">{{$item->name}}</option>
-                    @endforeach
-                  </select>
-                </div>
-              </div> --}}
-              <div class="col-md-12 text-center mb-3"><button type="submit" class="btn btn-primary">Tìm kiếm</button></div>
-            </form>
-          {{-- </div> --}}
-              
+          </form>
+           </div>
+
         	@foreach($data as $item)
         	<div class="col-md-3 position-relative cv mb-5">
         		<div class="shadow header-cv text-white border-top border-left border-right rounded-top">
@@ -130,7 +94,7 @@ Danh sách ứng viên
             <a class="dropdown-item status" data-id="{{$item->id}}" data-status="Pass" href="#">Pass</a>
 				  {{--   <a class="dropdown-item status" data-id="{{$item->id}}" data-status="Consider"href="#">Consider</a> --}}
 				    <a class="dropdown-item status" data-id="{{$item->id}}" data-status="Offer" href="#">Offer</a>
-				    
+
 				    <a class="dropdown-item status" data-id="{{$item->id}}" data-status="Blacklist" href="#">Blacklist</a>
 				  </div>
 				</div>
@@ -181,7 +145,7 @@ Danh sách ứng viên
 							<span class="badge badge-secondary">#NodeJS</span>
 							<span class="badge badge-secondary">#NodeJS</span> --}}
 						</div>
-						
+
 					</div>
 	    		</div>
 	    		<div class="footer-cv border-left border-right border-bottom bg-white shadow rounded-bottom">
@@ -227,7 +191,7 @@ Danh sách ứng viên
         <div class="modal-dialog modal-md">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title" style="font-size: 16px">Add tag cho <br> 
+              <h4 class="modal-title" style="font-size: 16px">Add tag cho <br>
               	<span class="name-addtag font-weight-bold"></span>
               	<br>
               </h4>
@@ -264,7 +228,7 @@ Danh sách ứng viên
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title" style="font-size: 16px">Thời gian hẹn<br> 
+              <h4 class="modal-title" style="font-size: 16px">Thời gian hẹn<br>
               	<span class="name-addtag font-weight-bold"></span>
               	<br>
               </h4>
@@ -304,7 +268,7 @@ Danh sách ứng viên
                           <label for="location2" style="font-weight: 500" class="custom-control-label">HCM (tầng 10F, tòa nhà số 198A, đường 3/2, phường 12, Q10, TP HCM)</label>
                         </div>
                       </div>
-                    </div> 
+                    </div>
 			        <div class="col-sm-4">
                       <!-- checkbox -->
                       <div class="form-group">
@@ -326,7 +290,7 @@ Danh sách ứng viên
                           <label for="people4" style="font-weight: 500" class="custom-control-label">Ms Diệp: 0916661812</label>
                         </div>
                       </div>
-                    </div> 
+                    </div>
               		<div class="col-sm-6">
 			            <div class="form-group">
 						    <label for="exampleInputEmail1">Link website</label>
@@ -339,10 +303,10 @@ Danh sách ứng viên
 						    <input type="text" class="form-control" id="linkdes">
 						</div>
 			        </div>
-			    
+
             	</div>
-            	
-		        
+
+
               <!-- /.col -->
             </div>
             <div class="modal-footer justify-content-between">
@@ -358,7 +322,7 @@ Danh sách ứng viên
     <div class="modal-dialog modal-md">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title" style="font-size: 16px">Thời gian hẹn<br> 
+          <h4 class="modal-title" style="font-size: 16px">Thời gian hẹn<br>
           	<span class="name-addtag font-weight-bold"></span>
           	<br>
           </h4>
@@ -378,13 +342,13 @@ Danh sách ứng viên
 	                </div>
 	            </div>
 	        </div>
-	        
+
           </div>
           <!-- /.col -->
         </div>
         <div class="modal-footer justify-content-between">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary btnsubmit-invi">Save changes</button>
+          <button type="button" class="btn btn-primary btnsubmit-fail">Save changes</button>
         </div>
       </div>
       <!-- /.modal-content -->
@@ -475,7 +439,7 @@ Danh sách ứng viên
 				  switch (value) {
 				    case "ok":
 				      location.reload();
-				 
+
 				    default:
 				      location.reload();
 				  }
@@ -488,7 +452,7 @@ Danh sách ứng viên
     	$id 	= $(this).data('id');
     	// console.log($titleemail);
     	if ($data == "Invite") {
-			 $namecv = $(this).parent().parent().parent().find('.namecv').text();
+            $namecv = $(this).parent().parent().parent().find('.namecv').text();
     		$job	= $(this).parent().parent().parent().parent().find('.jobcv').text();
     		$titleemail = "APPOTA - Thư mời phỏng vấn vị trí "+$job;
     		$email 	= $(this).parent().parent().parent().parent().find('.emailcv').text();
@@ -533,19 +497,18 @@ Danh sách ứng viên
 						  switch (value) {
 						    case "ok":
 						      location.reload();
-						 
+
 						    default:
 						      location.reload();
 						  }
 						});
 		            }
 		        });
-		    
+
     		})
     	}else if($data == "Fail") {
     		$namecv = $(this).parent().parent().parent().find('.namecv').text();
     		$email 	= $(this).parent().parent().parent().parent().find('.emailcv').text();
-
     		$.ajax({
 		            url : "/updatestatus",
 		            type: "POST",
@@ -574,7 +537,7 @@ Danh sách ứng viên
 						  switch (value) {
 						    case "ok":
 						      location.reload();
-						 
+
 						    default:
 						      location.reload();
 						  }
@@ -614,7 +577,7 @@ Danh sách ứng viên
 						  switch (value) {
 						    case "ok":
 						      location.reload();
-						 
+
 						    default:
 						      location.reload();
 						  }
@@ -646,7 +609,7 @@ Danh sách ứng viên
 					  switch (value) {
 					    case "ok":
 					      location.reload();
-					 
+
 					    default:
 					      // location.reload();
 					  }
@@ -678,18 +641,18 @@ Danh sách ứng viên
 	            	swal(value.content, {
 				      icon: "success",
 				    });
-				    
+
 	            }
 	        });
-		    
+
 		  }
 		});
     });
-    // $(document).ready(function() { 
+    // $(document).ready(function() {
     $("#statussearch option").each(function(){
-     
+
     });
     // });
-    
+
 </script>
 @endsection

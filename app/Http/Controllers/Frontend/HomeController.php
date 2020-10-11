@@ -18,7 +18,7 @@ class HomeController extends Controller
     public function index()
     {
         //
-        $job = Job::all();
+        $job = Job::where([['talenpools_id',"=",0],['status','on']])->get();
         return view("frontend/home",compact('job'));
     }
 
@@ -48,7 +48,7 @@ class HomeController extends Controller
             $file = $request->file('file');
             $format = false;
             $IMGextensions = array('doc', 'docx', 'pdf', 'xls', 'xlsx');
-            // Xác thực tải lên thành công  
+            // Xác thực tải lên thành công
             if ($file->isValid()) {
                 $fileName = time() . '-' . str_replace(" ","",$file->getClientOriginalName());
                 $extension = $file->getClientOriginalExtension();
@@ -60,14 +60,14 @@ class HomeController extends Controller
                     if ($store) {
                         $cva = new Cv;
                         $cva->job   =   $request->job_function;
-                        $cva->name = $request->name; 
+                        $cva->name = $request->name;
                         $cva->birthday = $request->birthday;
-                        $cva->email = $request->email; 
+                        $cva->email = $request->email;
                         $cva->phone = $request->number_phone;
                         $cva->exp = $request->year_of_experience;
-                        $cva->description = $request->description;   
-                        $cva->salary = $request->salary;        
-                        $cva->source = $request->ref;    
+                        $cva->description = $request->description;
+                        $cva->salary = $request->salary;
+                        $cva->source = $request->ref;
                         $cva->cv  =  $linkcv;
                         $cva->save();
                         // $name = $request->name;
@@ -79,7 +79,7 @@ class HomeController extends Controller
                             'birthday' => $request->birthday,
                             'phone' => $request->number_phone,
                             'exp'   => $request->year_of_experience,
-                            'description' => $request->description,  
+                            'description' => $request->description,
                             'salary' => $request->salary,
                             'source' => $request->ref,
                             'body'  => EmailTemp::first()->content,
