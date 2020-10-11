@@ -4,20 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <title>Hệ thống tuyển dụng Appota</title>
-    <link rel="stylesheet" href="https://hr.appota.com/css/app.css">
-    <link rel="stylesheet" type="text/css" href="https://hr.appota.com/css/datetimepicker.min.css">
-    <link rel="stylesheet" href="https://hr.appota.com/form/css/style.css">
-    <link rel="stylesheet" type="text/css" href="https://hr.appota.com/css/select2.min.css">
+    <link rel="stylesheet" href="{{asset("css/appfrontend.css")}}">
+    <link rel="stylesheet" type="text/css" href="{{asset("css/datetimepicker.min.css")}}">
+    <link rel="stylesheet" href="{{asset("form/css/style.css")}}">
+    <link rel="stylesheet" type="text/css" href="{{asset("css/select2.min.css")}}">
 </head>
 <body>
 <div class="wrap">
     <div class="top">
         <div class="logo">
-            <img src="https://hr.appota.com/form/image/logo-white.png" class="logo-title">
+            <img src="{{asset("form/image/logo-white.png")}}" class="logo-title">
         </div>
         <div class="info">
             <div class="image">
-                <img src="https://hr.appota.com/form/image/graphic6.svg" class="graphic">
+                <img src="{{asset("form/image/graphic6.svg")}}" class="graphic">
             </div>
             <div class="text">
                 <h3>Hệ thống tuyển dụng Appota</h3>
@@ -130,15 +130,15 @@
         </div>
     </div>
 </div>
-<script src="https://hr.appota.com/js/app.js"></script>
-<script src="https://hr.appota.com/fontawesome-5.13.0/js/all.js"></script>
-<script src="https://hr.appota.com/js/common.js"></script>
-<script src="https://hr.appota.com/js/moment.min.js"></script>
-<script src="https://hr.appota.com/js/datetimepicker.min.js"></script>
-<script src="https://hr.appota.com/js/popper.min.js"></script>
-<script src="https://hr.appota.com/js/sweetalert2.all.min.js"></script>
-<script src="https://hr.appota.com/js/select2.min.js"></script>
-<script src="https://hr.appota.com/js/jquery.validate.min.js"></script>
+<script src="{{asset("js/appfrontend.js")}}"></script>
+<script src="{{asset("fontawesome-5.13.0/js/all.js")}}"></script>
+<script src="{{asset("js/common.js")}}"></script>
+<script src="{{asset("js/moment.min.js")}}"></script>
+<script src="{{asset("js/datetimepicker.min.js")}}"></script>
+<script src="{{asset("js/popper.min.js")}}"></script>
+<script src="{{asset("js/sweetalert2.all.min.js")}}"></script>
+<script src="{{asset("js/select2.min.js")}}"></script>
+<script src="{{asset("js/jquery.validate.min.js")}}"></script>
 <script>
     jQuery(document).ready(function ($) {
         $("#cv_form").validate();
