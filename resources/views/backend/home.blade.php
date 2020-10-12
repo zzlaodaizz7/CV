@@ -23,13 +23,13 @@ Home
             <!-- small box -->
             <div class="small-box bg-info">
               <div class="inner">
-                <h3>150</h3>
+                <h3>{{count(\App\Cv::where('status','default')->whereDate('created_at',\Carbon\Carbon::today()->toDateString())->get())}}</h3>
                 <p>Hôm nay</p>
               </div>
               <div class="icon">
                 <i class="ion ion-bag"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="{{url("home")}}#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -37,14 +37,14 @@ Home
             <!-- small box -->
             <div class="small-box bg-success">
               <div class="inner">
-                <h3>53<sup style="font-size: 20px">%</sup></h3>
+                <h3>{{count(\App\Cv::where('status','default')->whereDate('created_at',">=",\Carbon\Carbon::now()->subDays(7))->get())}}</h3>
 
                 <p>07 ngày qua</p>
               </div>
               <div class="icon">
                 <i class="ion ion-stats-bars"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="{{url("home")}}#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -52,18 +52,17 @@ Home
             <!-- small box -->
             <div class="small-box bg-warning">
               <div class="inner">
-                <h3>44</h3>
-
+                <h3>{{count(\App\Cv::where('status','default')->whereDate('created_at',">=",\Carbon\Carbon::now()->subDays(30))->get())}}</h3>
                 <p>30 ngày qua</p>
               </div>
               <div class="icon">
                 <i class="ion ion-person-add"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="{{url("home")}}#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
-          
+
         </div>
         <!-- /.row -->
         <!-- Main row -->
@@ -75,10 +74,10 @@ Home
               <div class="card-header" style="background-color: #d63031;color: white">
               	<div class="d-flex align-items-center float-left flex-column">
             		<h3 class="card-title">Các vị trí tuyển dụng mới nhất</h3>
-            	</div>	
+            	</div>
                 <div>
                 	<div class="card-tools float-right">
-                	
+
 	                  <span data-toggle="tooltip" title="3 New Messages" class="badge badge-primary">3</span>
 	                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
 	                    <i class="fas fa-minus"></i>
@@ -90,7 +89,7 @@ Home
 	                  <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i>
 	                  </button>
 	                </div>
-                </div>	     
+                </div>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -110,7 +109,7 @@ Home
                       </div>
                       <div class="w-50 p-1" style="
                       text-align: center;
-                      border-radius: 5px; 
+                      border-radius: 5px;
                       background-color: #0984e3;
                       color: white;
                       left: 0;
@@ -144,7 +143,7 @@ Home
                         </div>
                         <div class="col-md-3 d-flex justify-content-center">
                           <div class="w-75">
-                            <p class="m-0" style="font-size: 35px;margin-bottom: -5px !important; ">X</p>
+                            <p class="m-0" style="font-size: 35px;margin-bottom: -5px !important; ">{{count(\App\Cv::where([['job',$item->name],['status','Offer']])->get())}}</p>
                             <p>Nhận</p>
                           </div>
                           <div class="w-25 d-flex align-items-center">
@@ -163,7 +162,7 @@ Home
                       </div>
                     </div>
                   </div>
-              	</div>  
+              	</div>
                 @endforeach
               </div>
             </div>
@@ -211,7 +210,7 @@ Home
                 @endforeach
               </div>
               <!-- /.card-body -->
-              
+
               <!-- /.card-footer -->
             </div>
             <!-- /.card -->
@@ -221,7 +220,7 @@ Home
         <!-- /.row (main row) -->
       </div><!-- /.container-fluid -->
     </section>
-        
+
   	</div>
 @endsection
 @section('js')
@@ -260,7 +259,7 @@ Home
 	        "previous":   "Trước"
 	    },
       }
-      
+
     });
 </script>
 @endsection

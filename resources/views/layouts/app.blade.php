@@ -20,8 +20,18 @@
   <link rel="stylesheet" href="{{asset("plugins/overlayScrollbars/css/OverlayScrollbars.min.css")}}"/>
   <!-- Toastr -->
   <link rel="stylesheet" href="{{asset("plugins/toastr/toastr.min.css")}}">
+    <style>
+        .hide-loading{
+            display: none !important;
+        }
+    </style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+<div class="position-absolute w-100 h-100 d-flex align-items-center loading hide-loading" style="z-index: 9999;top: 0;background: #5e67697a">
+    <div class="text-center w-100">
+        <img src="{{asset("loading.gif")}}" alt="">
+    </div>
+</div>
 <div class="wrapper">
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -214,6 +224,14 @@
               </p>
             </a>
           </li>
+            <li class="nav-item">
+                <a href="/tag" class="nav-link @if($selected=='tag') active @endif">
+                    <i class="nav-icon fas fa-asterisk"></i>
+                    <p>
+                        Tags
+                    </p>
+                </a>
+            </li>
           <li class="nav-header">Talen pool</li>
           @foreach(\App\Job::where('talenpools_id',0)->get() as $item)
           <li class="nav-item">
@@ -228,6 +246,7 @@
       </nav>
       <!-- /.sidebar-menu -->
     </div>
+
     <!-- /.sidebar -->
   </aside>
 
@@ -272,6 +291,12 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+  function showload(){
+      $('.loading').removeClass("hide-loading");
+  }
+  function hideload(){
+      $('.loading').addClass("hide-loading");
+  }
 </script>
 @yield('js')
 <!-- REQUIRED SCRIPTS -->

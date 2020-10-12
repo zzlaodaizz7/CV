@@ -8,8 +8,18 @@
     <link rel="stylesheet" type="text/css" href="{{asset("css/datetimepicker.min.css")}}">
     <link rel="stylesheet" href="{{asset("form/css/style.css")}}">
     <link rel="stylesheet" type="text/css" href="{{asset("css/select2.min.css")}}">
+    <style>
+        .hide-loading{
+            display: none !important;
+        }
+    </style>
 </head>
 <body>
+<div class="position-absolute w-100 h-100 d-flex align-items-center loading hide-loading" style="z-index: 9999;top: 0;background: #5e67697a">
+    <div class="text-center w-100">
+        <img src="{{asset("loading.gif")}}" alt="">
+    </div>
+</div>
 <div class="wrap">
     <div class="top">
         <div class="logo">
@@ -50,7 +60,7 @@
                         </select> --}}
                         <select class="form-control select2" name="job_function" style="width: 100%;">
                             @foreach($job as $item)
-                                @foreach($item->getjob as $ytem)
+                                @foreach($item->getjob->where('status','on') as $ytem)
                                     <option value="{{$ytem->name}}">{{$ytem->name}}</option>
                                 @endforeach
                             @endforeach
@@ -123,7 +133,7 @@
 
                     </div>
                     <div class="form-group text-center col-12 col-sm-12">
-                        <button type="" class="btn btn-submit">Gửi thông tin</button>
+                        <input type="submit" class="btn btn-submit" value="Gửi thông tin">
                     </div>
                 </form>
             </div>
@@ -141,7 +151,21 @@
 <script src="{{asset("js/jquery.validate.min.js")}}"></script>
 <script>
     jQuery(document).ready(function ($) {
+        function showload(){
+            $('.loading').removeClass("hide-loading");
+        }
+        function hideload(){
+            $('.loading').addClass("hide-loading");
+        }
+        $(".btn-submit").click(function(){
+            if ($("#cv_form").valid()==true){
+                $(this).prop('disabled', true);
+                showload();
+                $("#cv_form").submit();
+            }
+        });
         $("#cv_form").validate();
+
         $(function () {
             let _datetimepicker = $('#birthday');
             _datetimepicker.daterangepicker({

@@ -396,6 +396,9 @@
                     $titleemail = "APPOTA - Thư mời phỏng vấn vị trí " + $job;
                     $email = ui.item.find('input[name=emailcv]').val();
                     if ($start != $finish) {
+                        if ($finish != "Invite"){
+                            showload();
+                        }
                         $isitem = $(this);
                         if ($finish == "Invite") {
                             $('#modal-datetime').modal('show');
@@ -404,6 +407,7 @@
                             })
                             $('#title-invite').val($titleemail);
                             $('.btnsubmit-invi').click(function () {
+                                showload();
                                 $time = $('input[name=timeinvite]').val();
                                 $linkweb = $('#linkweb').val();
                                 $linkdes = $('#linkdes').val();
@@ -429,7 +433,8 @@
                                     },
                                     success: function (data) {
                                         let value = JSON.parse(JSON.stringify(data));
-                                        console.log(value);
+                                        // console.log(value);
+                                        hideload();
                                         swal(value.content, {
                                             icon: "success",
                                             buttons: {
@@ -471,6 +476,7 @@
                                 },
                                 success: function (data) {
                                     let value = JSON.parse(JSON.stringify(data));
+                                    hideload();
                                     swal(value.content, {
                                         icon: "success",
                                         buttons: {
@@ -504,6 +510,7 @@
                                 },
                                 success: function (data) {
                                     let value = JSON.parse(JSON.stringify(data));
+                                    hideload();
                                     swal(value.content, {
                                         icon: "success",
                                         buttons: {

@@ -15,7 +15,7 @@ class TimeInterviewController extends Controller
     public function index()
     {
         //
-        $data = Cv::where('status','Invite')->get();
+        $data = Cv::where('status','Invite')->paginate(40);
         return view('backend\timeinterview',compact('data'));
     }
 

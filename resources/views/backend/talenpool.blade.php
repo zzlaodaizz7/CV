@@ -395,6 +395,9 @@
                     $titleemail = "APPOTA - Thư mời phỏng vấn vị trí " + $job;
                     $email = ui.item.find('input[name=emailcv]').val();
                     if ($start != $finish) {
+                        if ($finish != "Invite"){
+                            showload();
+                        }
                         $isitem = $(this);
                         if ($finish == "Invite") {
                             $('#modal-datetime').modal('show');
@@ -403,6 +406,7 @@
                             })
                             $('#title-invite').val($titleemail);
                             $('.btnsubmit-invi').click(function () {
+                                showload();
                                 $time = $('input[name=timeinvite]').val();
                                 $linkweb = $('#linkweb').val();
                                 $linkdes = $('#linkdes').val();
@@ -428,7 +432,8 @@
                                     },
                                     success: function (data) {
                                         let value = JSON.parse(JSON.stringify(data));
-                                        console.log(value);
+                                        // console.log(value);
+                                        hideload();
                                         swal(value.content, {
                                             icon: "success",
                                             buttons: {
@@ -450,7 +455,8 @@
                                             });
                                     },
                                     error: function (data) {
-                                        console.log("a");
+                                        // console.log("a");
+                                        hideload();
                                         toastr["error"](JSON.parse(data.responseText).content);
 
                                     }
@@ -469,6 +475,7 @@
                                     fail: 1,
                                 },
                                 success: function (data) {
+                                    hideload();
                                     let value = JSON.parse(JSON.stringify(data));
                                     swal(value.content, {
                                         icon: "success",
@@ -502,6 +509,7 @@
                                     status: $finish
                                 },
                                 success: function (data) {
+                                    hideload();
                                     let value = JSON.parse(JSON.stringify(data));
                                     swal(value.content, {
                                         icon: "success",

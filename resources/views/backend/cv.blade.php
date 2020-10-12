@@ -381,12 +381,7 @@ Danh sách ứng viên
         // Summernote
         $('.content-emailinvite').summernote();
         var back = ["#f7347a","#ff7f7f","#56672c","#616559","#123b65","#01080e","#3b0c4e","#696969"];
-        // console.log(back[Math.floor(Math.random()*back.length)]);
-        // var rand = back[Math.floor(Math.random() * back.length)];
-        // $('.header-cv').css('background',rand);
         $('.header-cv').each(function(){
-          // console.log(back[Math.floor(Math.random()*back.length)]);
-          // var rand = back[Math.floor(Math.random() * back.length)];
           $(this).css('background-color', back[Math.floor(Math.random() * back.length)]);
         })
     });
@@ -402,7 +397,7 @@ Danh sách ứng viên
 			$('.status-a').each(function(){
 				if ($namestatus == $(this).text()) {
 					// $('.select2 .select2-hidden-accessible').append($(this));
-					console.log($(this));
+					// console.log($(this));
 				}
 			});
 		});
@@ -416,7 +411,7 @@ Danh sách ứng viên
     })
     $('.btnsubmit-addtag').click(function(){
     	$data = $('form[name=addtagform]').serialize();
-    	// console.log($data['tag[]']);
+    	showload();
     	$.ajax({
             url : "/cv",
             type: "POST",
@@ -424,6 +419,7 @@ Danh sách ứng viên
             success: function (data) {
             	let value = JSON.parse(JSON.stringify(data));
             	// console.log(value.content);
+                hideload();
             	swal(value.content, {
 			      icon: "success",
 			      buttons: {
@@ -450,8 +446,12 @@ Danh sách ứng viên
     $('.status').click(function(){
     	$data = $(this).data('status');
     	$id 	= $(this).data('id');
+    	if ($data != "Invite"){
+            showload();
+        }
     	// console.log($titleemail);
     	if ($data == "Invite") {
+            showload();
             $namecv = $(this).parent().parent().parent().find('.namecv').text();
     		$job	= $(this).parent().parent().parent().parent().find('.jobcv').text();
     		$titleemail = "APPOTA - Thư mời phỏng vấn vị trí "+$job;
@@ -481,7 +481,8 @@ Danh sách ứng viên
 		            },
 		            success: function (data) {
 		            	let value = JSON.parse(JSON.stringify(data));
-		            	console.log(value);
+		            	// console.log(value);
+                        hideload();
 		            	swal(value.content, {
 					      icon: "success",
 					      buttons: {
@@ -497,7 +498,6 @@ Danh sách ứng viên
 						  switch (value) {
 						    case "ok":
 						      location.reload();
-
 						    default:
 						      location.reload();
 						  }
@@ -521,7 +521,8 @@ Danh sách ứng viên
 		            },
 		            success: function (data) {
 		            	let value = JSON.parse(JSON.stringify(data));
-		            	console.log(value);
+		            	// console.log(value);
+                        hideload();
 		            	swal(value.content, {
 					      icon: "success",
 					      buttons: {
@@ -561,7 +562,8 @@ Danh sách ứng viên
 		            },
 		            success: function (data) {
 		            	let value = JSON.parse(JSON.stringify(data));
-		            	console.log(value);
+		            	// console.log(value);
+                        hideload();
 		            	swal(value.content, {
 					      icon: "success",
 					      buttons: {
@@ -594,6 +596,7 @@ Danh sách ứng viên
 	            },
 	            success: function (data) {
 	            	let value = JSON.parse(JSON.stringify(data));
+	            	hideload();
 	            	swal(value.content, {
 				      icon: "success",
 				      buttons: {
@@ -611,7 +614,7 @@ Danh sách ứng viên
 					      location.reload();
 
 					    default:
-					      // location.reload();
+					      location.reload();
 					  }
 					});
 				    // location.reload();

@@ -31,7 +31,7 @@ Job
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
-        
+
         <!-- Main row -->
         <div class="row">
           <!-- Left col -->
@@ -41,7 +41,7 @@ Job
               <div class="card-header ">
               	<div class="d-flex align-items-center float-left flex-column">
             		<h3 class="card-title">Lịch phỏng vấn sắp tới</h3>
-            	</div>	
+            	</div>
                 <div>
                 	<div class="card-tools float-right">
                 	   <button type="button" class="btn btn-success btn-sm float-right" data-toggle="modal" data-target="#modal-xl-add">
@@ -61,7 +61,7 @@ Job
 	                  <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i>
 	                  </button> --}}
 	                </div>
-                </div>	     
+                </div>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -81,7 +81,7 @@ background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(170,14,31,1) 100%, rgb
 	                <tbody>
 	                @foreach($job as $item)
                     <tr style="background-color: #af323233">
-                      <td class="border-0 position-relative">{{$item->name}} 
+                      <td class="border-0 position-relative">{{$item->name}}
                         @if($item->status == 'on')
                           <i class="far fa-check-circle" style="color: green;position: absolute;top: 0;right: 0"></i>
                         @endif
@@ -103,27 +103,26 @@ background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(170,14,31,1) 100%, rgb
                       <tr>
                         <td class="border">
                             <div class="row">
-                                <div class="col-md-7 pr-0 ">Ứng tuyển:</div> 
+                                <div class="col-md-7 pr-0 ">Ứng tuyển:</div>
                                 <div class="col-md-3 p-0">{{count(\App\Cv::where([['job',$ytem->name],['status','default']])->get())}}</div>
-                         
-                                <div class="col-md-7 pr-0 ">Mời:</div> 
+
+                                <div class="col-md-7 pr-0 ">Mời:</div>
                                 <div class="col-md-3 p-0"> {{count(\App\Cv::where([['job',$ytem->name],['status','Invite']])->get())}}</div>
 
                                  <div class="col-md-7 pr-0">Offer: </div>
-                                 <div class="col-md-3 p-0"> 
-                                    X
+                                 <div class="col-md-3 p-0">{{count(\App\Cv::where([['job',$ytem->name],['status','Offer']])->get())}}
                                 </div>
                                 <div class="col-md-7 pr-0">Fail: </div>
                                 <div class="col-md-3 p-0"> {{count(\App\Cv::where([['job',$ytem->name],['status','Fail']])->get())}}
                                 </div>
                             </div>
-                                
-                             
-                               
-                      
-                            
+
+
+
+
+
                              {{-- - {{count(\App\Cv::where([['job',$ytem->name],['status','Invite']])->get())}}
-                              - Offer 
+                              - Offer
                               - {{count(\App\Cv::where([['job',$ytem->name],['status','Fail']])->get())}} --}}
                         </td>
                         <td class="border position-relative">{{$ytem->name}} @if($ytem->status == 'on')
@@ -142,24 +141,24 @@ background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(170,14,31,1) 100%, rgb
                         </td>
                     </tr>
                     @endforeach
-                    
+
                   @endforeach
 
 	          			</td>
 	                </tr>
-	                
+
 	                </tfoot>
 	              </table>
-              	</div>  
+              	</div>
               </div>
-              
+
             </div>
             <!--/.direct-chat -->
 
           </section>
           <!-- /.Left col -->
           <!-- right col (We are only adding the ID to make the widgets sortable)-->
-       
+
           <!-- right col -->
         </div>
         <!-- /.row (main row) -->
@@ -169,7 +168,7 @@ background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(170,14,31,1) 100%, rgb
   	</div>
 <div class="modal fade" id="modal-xl-edit">
         <div class="modal-dialog modal-md">
-            
+
             <form class="modal-content" name="edit-job">
                 <input name="id" type="hidden" value="" />
                 <div class="modal-header">
@@ -209,7 +208,7 @@ background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(170,14,31,1) 100%, rgb
                                 <input type="text" class="form-control"  name="descrip"  placeholder="Tên danh mục" required />
                             </div>
                         </div>
-                        
+
                         <div class="col-md-9">
                             <div class="form-group">
                                 <label for="name">Thời gian bắt đầu và kết thúc</label>
@@ -262,7 +261,7 @@ background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(170,14,31,1) 100%, rgb
                                 <input type="text" class="form-control" id="name" name="name"  placeholder="Tên danh mục" required />
                                 <input type="hidden" name="cate" value="1" />
                             </div>
-                      
+
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
@@ -270,7 +269,7 @@ background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(170,14,31,1) 100%, rgb
                                 <div class="form-control border-0">
                                   <input type="checkbox" name="" class="price_check" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
                                 </div>
-                                <input type="hidden" name="status" class="status">
+                                <input type="hidden" name="status" class="status" value="on">
                             </div>
                         </div>
                     </div>
@@ -324,7 +323,7 @@ background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(170,14,31,1) 100%, rgb
                                 <input type="text" class="form-control" id="descrip" name="descrip"  placeholder="Tên danh mục" required />
                             </div>
                         </div>
-                        
+
                         <div class="col-md-9">
                             <div class="form-group">
                                 <label for="name">Thời gian bắt đầu và kết thúc</label>
@@ -374,7 +373,7 @@ background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(170,14,31,1) 100%, rgb
                                 <input type="text" class="form-control" id="name" name="name"  placeholder="Tên danh mục" required />
                                 <input type="hidden" name="cate" value="1" />
                             </div>
-                      
+
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
@@ -382,7 +381,7 @@ background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(170,14,31,1) 100%, rgb
                                 <div class="form-control border-0">
                                   <input type="checkbox" name="" class="price_check" checked="" data-bootstrap-switch data-off-color="danger" data-on-color="success">
                                 </div>
-                                <input type="hidden" name="status" class="status">
+                                <input type="hidden" name="status" class="status" value="on">
                             </div>
                         </div>
                     </div>
@@ -462,7 +461,7 @@ background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(170,14,31,1) 100%, rgb
     //       }
     // });
  $(".price_check").bootstrapSwitch({
-    onSwitchChange: function(e, state) { 
+    onSwitchChange: function(e, state) {
       console.log(state);
       if (state == true) {
         $(".status").val("on");
@@ -516,13 +515,13 @@ background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(170,14,31,1) 100%, rgb
                   switch (value) {
                     case "ok":
                       location.reload();
-                 
+
                     default:
                       location.reload();
                   }
                 });
               }else{
-                  
+
               }
           }
       });
@@ -555,7 +554,7 @@ background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(170,14,31,1) 100%, rgb
                   switch (value) {
                     case "ok":
                       location.reload();
-                 
+
                     default:
                       location.reload();
                   }
@@ -592,7 +591,7 @@ background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(170,14,31,1) 100%, rgb
         $(".price_check").bootstrapSwitch('state', false);
       }
       $("#idcate").val($databtn['id']);
-  });  
+  });
   $('form[name=add-cate]').submit(function(e){
     e.preventDefault();
     $data = $('form[name=add-cate]').serialize();
@@ -618,18 +617,18 @@ background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(170,14,31,1) 100%, rgb
                   switch (value) {
                     case "ok":
                       location.reload();
-                 
+
                     default:
                       location.reload();
                   }
                 });
               }else{
-                  
+
               }
           }
         });
   });
-  
+
   $("form[name=edit-cate]").submit(function(e){
     e.preventDefault();
     $id = $('#idcate').val();
@@ -657,7 +656,7 @@ background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(170,14,31,1) 100%, rgb
                 switch (value) {
                   case "ok":
                     location.reload();
-               
+
                   default:
                     location.reload();
                 }

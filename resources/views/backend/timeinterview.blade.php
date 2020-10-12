@@ -23,12 +23,17 @@ Time Inteview
         }
         .table-hover tbody tr:hover button{
            background-color: #ffe4e1 !important;
-     
+
         }
         table tr:last-child{
             border-radius:0 10px 0 0;
             border-color: white !important;
         }
+  .pagination {
+      margin: 0 !important;
+      display: flex;
+      justify-content: center;
+  }
 </style>
  <link rel="stylesheet" href="//cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
 @endsection
@@ -44,7 +49,7 @@ Time Inteview
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-              <table id="example1" class="table-hover">
+              <table id="example1" class="table  table-hover">
                 <thead style="background: rgb(0,0,0);
 background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(170,14,31,1) 100%, rgba(0,212,255,1) 100%);color: white">
                 <tr>
@@ -81,8 +86,10 @@ background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(170,14,31,1) 100%, rgb
                 </tr>
                 @endforeach
                 </tbody>
-                
               </table>
+                <div class="text-center">
+                    {{$data->links()}}
+                </div>
             </div>
             <!-- /.card-body -->
           </div>
@@ -95,44 +102,11 @@ background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(170,14,31,1) 100%, rgb
   </div>
 @endsection
 @section('js')
-<!-- DataTables -->
-<script src="plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-<script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-<script src="plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
 {{-- sweetalert --}}
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <!-- DataTables -->
-
-<script src="//cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
 <script>
   $(function () {
-    $("#example1").DataTable({
-      "autoWidth": false,
-        "bSort": false,
-        "pageLength": 10,
-        "info": false,
-        "language": {
-            // "info": "Hiển thị _START_ đến _END_ của _TOTAL_ bản",
-            "lengthMenu": "Hiển thị _MENU_ bản ghi",
-            "paginate": {
-                "first": "Đầu tiên",
-                "last": "Cuối",
-                "next": "Tiếp",
-                "previous": "Trước"
-
-            },
-          }
-    });
-    // $('#example2').DataTable({
-    //   "paging": true,
-    //   "lengthChange": false,
-    //   "searching": false,
-    //   "ordering": true,
-    //   "info": true,
-    //   "autoWidth": false,
-    //   "responsive": true,
-    // });
   });
   $('.status').click(function(){
       $data = $(this).data('status');
@@ -165,14 +139,14 @@ background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(170,14,31,1) 100%, rgb
               switch (value) {
                 case "ok":
                   location.reload();
-             
+
                 default:
                   location.reload();
               }
             });
                 }
             });
-        
+
         })
       }else{
         $.ajax({
@@ -199,7 +173,7 @@ background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(170,14,31,1) 100%, rgb
             switch (value) {
               case "ok":
                 location.reload();
-           
+
               default:
                 location.reload();
             }

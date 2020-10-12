@@ -20,11 +20,12 @@ class OverviewController extends Controller
         //
         $tags = Tag::all();
         $pagemax = 0;
-        $pass=count(Cv::where('status','=','default')->get());
+        $pass=count(Cv::where('status','=','Pass')->get());
         $invi=count(Cv::where('status','=','Invite')->get());
         $fail=count(Cv::where('status','=','Fail')->get());
         $blac=count(Cv::where('status','=','Blacklist')->get());
         $offe=count(Cv::where('status','=','Offer')->get());
+        $data = Cv::where('status','=','Pass')->orderBy('updated_at',"desc")->paginate(40);
         if ($pagemax < $pass) {
             $pagemax = $pass;
             $data = Cv::where('status','=','Pass')->orderBy('updated_at',"desc")->paginate(40);
@@ -45,7 +46,7 @@ class OverviewController extends Controller
             $pagemax = $offe;
              $data = Cv::where('status','=','Offer')->orderBy('updated_at',"desc")->paginate(40);
         }
-        $datapass = Cv::where('status','=','default')->orderBy('updated_at',"desc")->paginate(40);
+        $datapass = Cv::where('status','=','Pass')->orderBy('updated_at',"desc")->paginate(40);
         $datafail = Cv::where('status','=','Fail')->orderBy('updated_at',"desc")->paginate(40);
         $datablacklist = Cv::where('status','=','Blacklist')->orderBy('updated_at',"desc")->paginate(40);
         $dataoffer = Cv::where('status','=','Offer')->orderBy('updated_at',"desc")->paginate(40);
@@ -95,6 +96,7 @@ class OverviewController extends Controller
         $datablacklist = Job::select("cvs.*")->where('talenpools_id',Job::where('name',$id)->first()->id)->join("cvs","cvs.job","=","jobs.name")->where("cvs.status","Blacklist")->orderBy('updated_at',"desc")->paginate(40);
         $dataoffer = Job::select("cvs.*")->where('talenpools_id',Job::where('name',$id)->first()->id)->join("cvs","cvs.job","=","jobs.name")->where("cvs.status","Offer")->orderBy('updated_at',"desc")->paginate(40);
         $datainvi = Job::select("cvs.*")->where('talenpools_id',Job::where('name',$id)->first()->id)->join("cvs","cvs.job","=","jobs.name")->where("cvs.status","Invite")->orderBy('updated_at',"desc")->paginate(40);
+        $data = $data = Job::select("cvs.*")->where('talenpools_id',Job::where('name',$id)->first()->id)->join("cvs","cvs.job","=","jobs.name")->where("cvs.status","Pass")->orderBy('updated_at',"desc")->paginate(40);
         if ($pagemax < $pass) {
             $pagemax = $pass;
             $data = Job::select("cvs.*")->where('talenpools_id',Job::where('name',$id)->first()->id)->join("cvs","cvs.job","=","jobs.name")->where("cvs.status","Pass")->orderBy('updated_at',"desc")->paginate(40);

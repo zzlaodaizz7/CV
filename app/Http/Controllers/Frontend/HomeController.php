@@ -72,17 +72,8 @@ class HomeController extends Controller
                         $cva->save();
                         // $name = $request->name;
                         $info = [
-                            'title' =>  EmailTemp::first()->title,
                             'name'  => $request->name,
-                            'email' => $request->email,
-                            'job'   => $request->job_function,
-                            'birthday' => $request->birthday,
-                            'phone' => $request->number_phone,
-                            'exp'   => $request->year_of_experience,
-                            'description' => $request->description,
-                            'salary' => $request->salary,
-                            'source' => $request->ref,
-                            'body'  => EmailTemp::first()->content,
+
                         ];
                         \Mail::to($request->email)->send(new \App\Mail\Tycv($info));
                         return redirect('/')->with('status', 'Nộp CV thành công!');
