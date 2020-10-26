@@ -158,14 +158,15 @@
         $('#file').bind('change', function() {
 
           //this.files[0].size gets the size of your file.
-          // alert(this.files[0].size);
-            // alert($(this).val().split('.').pop().toLowerCase());
-            // console.log(this.files[0].size);
-            var fileExtension = ['doc', 'docx', 'pdf', 'xls', 'xlsx'];
-            if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
-                alert("Các định dạng file được chấp nhận : "+fileExtension.join(', '));
-                $("#file").val(null);
-
+          if (this.files[0].size > 100000) {
+            alert("File quá dung lượng");
+            $("#file").val(null);
+            }else{
+                var fileExtension = ['doc', 'docx', 'pdf', 'xls', 'xlsx'];
+                if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
+                    alert("Các định dạng file được chấp nhận : "+fileExtension.join(', '));
+                    $("#file").val(null);
+                }
             }
         });
         $(window).resize(function () {
