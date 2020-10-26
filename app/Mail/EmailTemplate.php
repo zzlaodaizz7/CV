@@ -30,9 +30,6 @@ class EmailTemplate extends Mailable
     public function build()
     {
         $phr = $this->info['title'];
-        $needrpl = array(':name:',':email:',':birthday:',':job:',':birthday:',':phone:',':exp:',':description:',':salary:',':source:');
-        $rpl = array($this->info['name'],$this->info['email'],$this->info['birthday'],$this->info['job'],$this->info['birthday'],$this->info['phone'],$this->info['exp'],$this->info['description'],$this->info['salary'],$this->info['source']);
-        $result = str_replace($needrpl,$rpl,$phr);
-        return $this->subject($result)->view('email.emailtemplate');
+        return $this->subject($this->info['title'])->view('email.emailtemplate');
     }
 }
