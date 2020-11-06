@@ -15,4 +15,5 @@ class Job extends Model
     public function getjob(){
     	return $this->hasMany('App\Job','talenpools_id','id');
     }
+//    public function
 }

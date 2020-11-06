@@ -94,17 +94,24 @@
 @endsection
 @section('content')
     <div class="content-wrapper">
-
-
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
+                    <form class="col-md-12 row" method="GET" id="filter">
+                        <div class="col-md-5 m-auto">
+                            <div class="form-group">
+                                <input type="text" style="width: 300px;float: left;border-top-right-radius: 0;border-bottom-right-radius: 0;" placeholder="Nhập tên cần tìm" name="keyword" value="" class="form-control" id="keyword">
+                                <button type="submit" style="border-top-left-radius: 0;border-bottom-left-radius: 0;" class="btn btn-primary"><i class="fas fa-search"></i></button>
+                            </div>
+                        </div>
+
+                    </form>
                     <div class="w20">
                         <div class="p-2 border-top border-left border-bottom status-title bg-primary">
                             Invite
-                            <div class="status-title-after position-absolute border-top border-right bg-primary">
-
+{{--                            <input type="text" class="filtersearch" name="filterinvite">--}}
+                            <div class="status-title-after h-100 position-absolute border-top border-right bg-primary">
                             </div>
                         </div>
                         <ul id="Invite" class="connectedSortable overflow-auto border-bottom-0 w-100 m-0">
@@ -117,6 +124,7 @@
                                         <input type="hidden" name="id" value="{{$item->id}}">
                                         <input type="hidden" name="jobcv" value="{{$item->job}}">
                                         <input type="hidden" name="emailcv" value="{{$item->email}}">
+                                        <input type="hidden" name="stt" value="{{$item->stt}}">
                                         <a class="font-weight-bold namecv" target="_blank"
                                            href="storage/{{$item->cv}}">{{$item->name}}</a>
                                         <p class="m-0">{{$item->phone}}</p>
@@ -129,7 +137,8 @@
                     <div class="w20">
                         <div class="p-2 border-top border-bottom status-title bg-info">
                             Pass
-                            <div class="status-title-after position-absolute border-top border-right bg-info">
+{{--                            <input type="text" class="filtersearch" name="filterpass">--}}
+                            <div class="status-title-after h-100 position-absolute border-top border-right bg-info">
 
                             </div>
                         </div>
@@ -143,6 +152,7 @@
                                         <input type="hidden" name="id" value="{{$item->id}}">
                                         <input type="hidden" name="jobcv" value="{{$item->job}}">
                                         <input type="hidden" name="emailcv" value="{{$item->email}}">
+                                        <input type="hidden" name="stt" value="{{$item->stt}}">
                                         <a class="font-weight-bold namecv"
                                            href="storage/{{$item->cv}}">{{$item->name}}</a>
                                         <p class="m-0">{{$item->phone}}</p>
@@ -155,7 +165,8 @@
                     <div class="w20">
                         <div class="p-2 border-top border-bottom status-title bg-success">
                             Offer
-                            <div class="status-title-after position-absolute bg-success border-top border-right">
+{{--                            <input type="text" class="filtersearch" name="filteroffer">--}}
+                            <div class="status-title-after h-100 position-absolute bg-success border-top border-right">
                             </div>
                         </div>
                         <ul id="Offer" class="connectedSortable overflow-auto w-100">
@@ -166,9 +177,9 @@
                                     </div>
                                     <div class="info w-100 h-100">
                                         <input type="hidden" name="id" value="{{$item->id}}">
-                                        <input type="hidden" name="id" value="{{$item->id}}">
                                         <input type="hidden" name="jobcv" value="{{$item->job}}">
                                         <input type="hidden" name="emailcv" value="{{$item->email}}">
+                                        <input type="hidden" name="stt" value="{{$item->stt}}">
                                         <a class="font-weight-bold namecv"
                                            href="storage/{{$item->cv}}">{{$item->name}}</a>
                                         <p class="m-0">{{$item->phone}}</p>
@@ -181,7 +192,8 @@
                     <div class="w20">
                         <div class="p-2 border-top status-title bg-danger">
                             Fail
-                            <div class="status-title-after position-absolute border-top border-right bg-danger">
+{{--                            <input type="text" class="filtersearch" name="filterfail">--}}
+                            <div class="status-title-after h-100 position-absolute border-top border-right bg-danger">
 
                             </div>
                         </div>
@@ -195,6 +207,7 @@
                                         <input type="hidden" name="id" value="{{$item->id}}">
                                         <input type="hidden" name="jobcv" value="{{$item->job}}">
                                         <input type="hidden" name="emailcv" value="{{$item->email}}">
+                                        <input type="hidden" name="stt" value="{{$item->stt}}">
                                         <a class="font-weight-bold namecv"
                                            href="storage/{{$item->cv}}">{{$item->name}}</a>
                                         <p class="m-0">{{$item->phone}}</p>
@@ -207,8 +220,8 @@
                     <div class="w20">
                         <div class="p-2 border-top border-bottom status-title bg-dark border-right">
                             Blacklist
+{{--                            <input type="text" class="filtersearch" name="filterblacklist">--}}
                             {{-- <div class="status-title-after position-absolute border-top border-right bg-bg">
-
                             </div> --}}
                         </div>
                         <ul id="Blacklist" class="connectedSortable overflow-auto w-100 ">
@@ -221,6 +234,7 @@
                                         <input type="hidden" name="id" value="{{$item->id}}">
                                         <input type="hidden" name="jobcv" value="{{$item->job}}">
                                         <input type="hidden" name="emailcv" value="{{$item->email}}">
+                                        <input type="hidden" name="stt" value="{{$item->stt}}">
                                         <a class="font-weight-bold namecv"
                                            href="storage/{{$item->cv}}">{{$item->name}}</a>
                                         <p class="m-0">{{$item->phone}}</p>
@@ -232,8 +246,10 @@
                     </div>
                 </div>
                 <div class="col-md-12 mt-3">
+                    @if(isset($data))
+                        {{$data->links()}}
+                        @endif
 
-                    {{$data->links()}}
                 </div>
             </div><!--/. container-fluid -->
 
@@ -370,6 +386,7 @@
                 use24hours: true,
                 format: 'YYYY-MM-DD HH:mm:ss'
             });
+
         });
         $(function () {
             $start = "";
@@ -379,7 +396,7 @@
                 items: 'li',
                 start: function (event, ui) {
                     $start = ui.item.parent().attr("id");
-                    // console.log("status start:"+ui.item.parent().attr("id"));
+                    console.log($start);
                 },
                 change: function (event, ui) {
                 },
@@ -387,19 +404,21 @@
                 },
                 stop: function (event, ui) {
                     $finish = ui.item.parent().attr("id");
-                    // console.log("id:"+ui.item.find("input[name=id]").val());
-                    // console.log("status:"+ui.item.parent().attr("id"));
-                    // console.log($namecv);
                     $id = ui.item.find("input[name=id]").val();
                     $namecv = ui.item.find(".namecv").text();
                     $job = ui.item.find('input[name=jobcv]').val();
                     $titleemail = "APPOTA - Thư mời phỏng vấn vị trí " + $job;
                     $email = ui.item.find('input[name=emailcv]').val();
+                    $pre = ui.item.prev().find('input[name=stt]').val();
+                    $next = ui.item.next().find('input[name=stt]').val();
+                    $here = ui.item.find('input[name=stt]');
+                    $val = ui.item.find('input[name=stt]').val();
+
+                    // return;
                     if ($start != $finish) {
-                        if ($finish != "Invite"){
+                        if ($finish != "Invite") {
                             showload();
                         }
-                        $isitem = $(this);
                         if ($finish == "Invite") {
                             $('#modal-datetime').modal('show');
                             $('#modal-datetime').on('hidden.bs.modal', function (e) {
@@ -413,6 +432,13 @@
                                 $linkdes = $('#linkdes').val();
                                 $location = $('input[name=customRadio]').val();
                                 $people = $('input[name="people"]:checked').val();
+                                if (typeof($pre) != "undefined" && typeof($next) != "undefined"){
+                                    $val = (parseFloat($pre) + parseFloat($next))/2;
+                                }else if(typeof($pre) != "undefined"){
+                                    $val = parseFloat($pre) + 2;
+                                }else if(typeof($next) != "undefined") {
+                                    $val = parseFloat($next) -2;
+                                }
                                 $.ajax({
                                     url: "/updatestatus",
                                     type: "POST",
@@ -430,39 +456,47 @@
                                         job: $job,
                                         name: $namecv,
                                         invi: 1,
+                                        val: $val,
                                     },
                                     success: function (data) {
                                         let value = JSON.parse(JSON.stringify(data));
-                                        // console.log(value);
+                                        $here.val($val);
                                         hideload();
-                                        swal(value.content, {
-                                            icon: "success",
-                                            buttons: {
-                                                // cancel: "Run away!",
-                                                catch: {
-                                                    text: "OK",
-                                                    value: "ok",
-                                                },
-                                            },
-                                        })
-                                            .then((value) => {
-                                                switch (value) {
-                                                    case "ok":
-                                                        $('#modal-datetime').modal('hide');
-                                                    location.reload();
-                                                    default:
-                                                    // location.reload();
-                                                }
-                                            });
+                                        toastr["success"]("Update thành công!");
+                                        // swal(value.content, {
+                                        //     icon: "success",
+                                        //     buttons: {
+                                        //         // cancel: "Run away!",
+                                        //         catch: {
+                                        //             text: "OK",
+                                        //             value: "ok",
+                                        //         },
+                                        //     },
+                                        // })
+                                        //     .then((value) => {
+                                        //         switch (value) {
+                                        //             case "ok":
+                                        //                 $('#modal-datetime').modal('hide');
+                                        //                 location.reload();
+                                        //             default:
+                                        //             // location.reload();
+                                        //         }
+                                        //     });
                                     },
                                     error: function (data) {
-                                        console.log("a");
                                         toastr["error"](JSON.parse(data.responseText).content);
 
                                     }
                                 });
                             })
                         } else if ($finish == "Fail") {
+                            if (typeof($pre) != "undefined" && typeof($next) != "undefined"){
+                                $val = (parseFloat($pre) + parseFloat($next))/2;
+                            }else if(typeof($pre) != "undefined"){
+                                $val = parseFloat($pre) + 2;
+                            }else if(typeof($next) != "undefined") {
+                                $val = parseFloat($next) -2;
+                            }
                             $.ajax({
                                 url: "/updatestatus",
                                 type: "POST",
@@ -473,71 +507,77 @@
                                     name: $namecv,
                                     email: $email,
                                     fail: 1,
+                                    val: $val,
                                 },
                                 success: function (data) {
                                     let value = JSON.parse(JSON.stringify(data));
+                                    $here.val($val);
                                     hideload();
-                                    swal(value.content, {
-                                        icon: "success",
-                                        buttons: {
-                                            // cancel: "Run away!",
-                                            catch: {
-                                                text: "OK",
-                                                value: "ok",
-                                            },
-                                            // defeat: true,
-                                        },
-                                    })
-                                        .then((value) => {
-                                            switch (value) {
-                                                case "ok":
-                                                    location.reload();
-
-                                                default:
-                                                    location.reload();
-                                            }
-                                        });
+                                    toastr["success"]("Update thành công!");
+                                    // swal(value.content, {
+                                    //     icon: "success",
+                                    //     buttons: {
+                                    //         // cancel: "Run away!",
+                                    //         catch: {
+                                    //             text: "OK",
+                                    //             value: "ok",
+                                    //         },
+                                    //         // defeat: true,
+                                    //     },
+                                    // })
+                                        // .then((value) => {
+                                        //     switch (value) {
+                                        //         case "ok":
+                                        //         // location.reload();
+                                        //
+                                        //         default:
+                                        //         // location.reload();
+                                        //     }
+                                        // });
                                 }
                             });
                         } else {
+                            if (typeof($pre) != "undefined" && typeof($next) != "undefined"){
+                                $val = (parseFloat($pre) + parseFloat($next))/2;
+                            }else if(typeof($pre) != "undefined"){
+                                $val = parseFloat($pre) + 2;
+                            }else if(typeof($next) != "undefined") {
+                                $val = parseFloat($next) -2;
+                            }
                             $.ajax({
                                 url: "/updatestatus",
                                 type: "POST",
                                 data: {
                                     "_token": "{{ csrf_token() }}",
                                     id: $id,
-                                    status: $finish
+                                    status: $finish,
+                                    val: $val,
                                 },
                                 success: function (data) {
                                     let value = JSON.parse(JSON.stringify(data));
+                                    $here.val($val);
                                     hideload();
-                                    swal(value.content, {
-                                        icon: "success",
-                                        buttons: {
-                                            // cancel: "Run away!",
-                                            catch: {
-                                                text: "OK",
-                                                value: "ok",
-                                            },
-                                            // defeat: true,
-                                        },
-                                    })
-                                        .then((value) => {
-                                            switch (value) {
-                                                case "ok":
-                                                    location.reload();
-
-                                                default:
-                                                // location.reload();
-                                            }
-                                        });
-                                    // location.reload();
+                                    toastr["success"]("Update thành công!");
+                                    // swal(value.content, {
+                                    //     icon: "success",
+                                    //     buttons: {
+                                    //         catch: {
+                                    //             text: "OK",
+                                    //             value: "ok",
+                                    //         },
+                                    //     },
+                                    // })
+                                    //     .then((value) => {
+                                    //         switch (value) {
+                                    //             case "ok":
+                                    //             default:
+                                    //         }
+                                    //     });
                                 }
                             });
                         }
                     }
                 }
-
             }).disableSelection();
 
             //initializes the plugin with empty options
@@ -546,12 +586,24 @@
             // $width = $(this).height()/Math.sqrt(2);
             // $(this).after().width($width).height($width);
             // });
+            //set height
             $(".connectedSortable").height($(".content-wrapper").height() - 42 - 38 - 20);
             var back = ["#f7347a", "#ff7f7f", "#56672c", "#616559", "#123b65", "#01080e", "#3b0c4e", "#696969", "#cbcba9", "#666666", "#40e0d0", "#800080", "#333333", "#ff7f50", "#660066", "#407294", "##5ac18e", "#daa520", "#8a2be2", "#6897bb", "#008000", "#800000"];
             $('.avt i').each(function () {
                 $(this).css('color', back[Math.floor(Math.random() * back.length)]);
             })
-
+            //searc
+            $(".filtersearch").change(function () {
+                console.log('chhnager');
+            });
+            $(".filtersearch").bind("enterKey", function (e) {
+                alert("Enter");
+            });
+            $(".filtersearch").keyup(function (e) {
+                if (e.keyCode == 13) {
+                    $(this).trigger("enterKey");
+                }
+            });
         });
 
     </script>

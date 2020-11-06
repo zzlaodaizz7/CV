@@ -59,21 +59,23 @@ class HomeController extends Controller
                     $store = Storage::putFileAs($path , $file , $fileName);
                     if ($store) {
                         $cva = new Cv;
-                        $cva->job   =   $request->job_function;
-                        $cva->name = $request->name;
-                        $cva->birthday = $request->birthday;
-                        $cva->email = $request->email;
-                        $cva->phone = $request->number_phone;
-                        $cva->exp = $request->year_of_experience;
+                        $cva->job       =   $request->job_function;
+                        $cva->name      = $request->name;
+                        $cva->birthday  = $request->birthday;
+                        $cva->email     = $request->email;
+                        $cva->phone     = $request->number_phone;
+                        $cva->exp       = $request->year_of_experience;
                         $cva->description = $request->description;
-                        $cva->salary = $request->salary;
-                        $cva->source = $request->ref;
-                        $cva->cv  =  $linkcv;
+                        $cva->salary    = $request->salary;
+                        $cva->source    = $request->ref;
+                        $cva->cv        =  $linkcv;
                         $cva->save();
-                        // $name = $request->name;
+                        $id = Cv::latest()->first()->id;
+                        $a = Cv::find($id);
+                        $a->stt = $id*1000;
+                        $a->save();
                         $info = [
                             'name'  => $request->name,
-
                         ];
                         \Mail::to($request->email)->send(new \App\Mail\Tycv($info));
                         return redirect('/')->with('status', 'Nộp CV thành công!');

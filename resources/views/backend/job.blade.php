@@ -143,11 +143,7 @@ background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(170,14,31,1) 100%, rgb
                     @endforeach
 
                   @endforeach
-
-	          			</td>
-	                </tr>
-
-	                </tfoot>
+                    </tbody>
 	              </table>
               	</div>
               </div>
