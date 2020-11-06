@@ -189,6 +189,16 @@
         // });
         $('#file').bind('change', function () {
 
+<<<<<<< HEAD
+          //this.files[0].size gets the size of your file.
+          if (this.files[0].size > 100000) {
+            alert("File quá dung lượng");
+            $("#file").val(null);
+            }else{
+                var fileExtension = ['doc', 'docx', 'pdf', 'xls', 'xlsx'];
+                if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
+                    alert("Các định dạng file được chấp nhận : "+fileExtension.join(', '));
+=======
             //this.files[0].size gets the size of your file.
             if (this.files[0].size > 100000) {
                 alert("File quá dung lượng");
@@ -197,6 +207,7 @@
                 var fileExtension = ['doc', 'docx', 'pdf', 'xls', 'xlsx'];
                 if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
                     alert("Các định dạng file được chấp nhận : " + fileExtension.join(', '));
+>>>>>>> 26d95eade87f1d8a66c50ac5ea222dffb7ad5089
                     $("#file").val(null);
                 }
             }
