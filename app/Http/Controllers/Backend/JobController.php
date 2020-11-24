@@ -54,7 +54,7 @@ class JobController extends Controller
                     'content'   => "Thêm thành công"
                 ]);
             }
-            
+
         }
     }
 
@@ -105,8 +105,8 @@ class JobController extends Controller
                     'content'   => "Thêm thành công"
                 ]);
             }
-            
-            
+
+
         }
     }
 
@@ -126,6 +126,6 @@ class JobController extends Controller
                 'content'   => "Thêm thành công"
             ]);
         }
-        
+
     }
 }

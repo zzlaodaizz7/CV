@@ -94,12 +94,24 @@
 @endsection
 @section('content')
     <div class="content-wrapper">
-
-
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
+                    <form class="col-md-12 row" method="GET" id="filter">
+                        <div class="col-md-3 m-auto">
+                            <div class="form-group">
+{{--                                <label for="jobfilter">Tìm kiếm theo job</label>--}}
+                                <select class="form-control" id="jobfilter" name="jobfilter">
+                                    <option value="a" @if(!isset($_GET['jobfilter'])) selected @endif>--Chọn job--</option>
+                                    @foreach($job as $item)
+                                        <option value="{{$item->name}}" @if(isset($_GET['jobfilter']) == $item->name) selected @endif>{{$item->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                    </form>
                     <div class="w20">
                         <div class="p-2 border-top border-left border-bottom status-title bg-primary">
                             Invite
@@ -371,6 +383,10 @@
             });
         });
         $(function () {
+            $('#jobfilter').change(function(){
+                // console.log($(this).val());
+                $('#filter').submit();
+            })
             $start = "";
             $finish = "";
             $("#Invite, #Fail , #Blacklist ,#default,#Pass,#Offer").sortable({

@@ -116,10 +116,10 @@
             </div>
           </div>
         </div>
-            
+
         <div class="input-group mb-3">
           <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password" required autocomplete="current-password">
-          
+
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -132,26 +132,19 @@
                 </span>
             @enderror
         <div class="row">
-          <div class="col-8">
-            <div class="icheck-primary">
-              <input type="checkbox" id="remember">
-              <label for="remember">
-                Remember Me
-              </label>
-            </div>
-          </div>
+
           <!-- /.col -->
-          <div class="col-4">
+          <div class="col-12 text-center">
             <button type="submit" class="btn btn-primary btn-block">{{ __('Login') }}</button>
           </div>
           <!-- /.col -->
         </div>
       </form>
 
-     
+
       <!-- /.social-auth-links -->
 
-     
+
     </div>
     <!-- /.login-card-body -->
   </div>

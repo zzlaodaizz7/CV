@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,12 +22,17 @@ Auth::routes();
 Route::get('test', 'TestController@index');
 //Route::prefix('admin')->group(function () {
 	Route::middleware('auth')->group(function () {
-		Route::resource('/home', 'Backend\HomeController');
+		Route::resource('/home', 'Backend\HomeController',[
+		    'name' => [
+		        'index' => 'home.index'
+            ]
+        ]);
 		Route::resource('/cv','Backend\CvController');
 		Route::resource('/timeinterview','Backend\TimeInterviewController');
 		Route::post('/updatestatus','Backend\CvController@updateStatus');
 		Route::post('/deletetag','Backend\CvController@deleteTag');
 		Route::resource('/job','Backend\JobController');
 		Route::resource('/overview','Backend\OverviewController');
+		Route::resource('/tag','Backend\TagController');
 	});
 //});

@@ -25,8 +25,10 @@ class CreateCvsTable extends Migration
             $table->string('source');
             $table->string('job');
             $table->string('cv');
+            $table->float('stt');
             $table->datetime('timeinvite')->nullable();
             $table->string('status')->default('default');
+            $table->text('tags')->nullable();
             $table->timestamps();
         });
     }
